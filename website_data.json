@@ -1,0 +1,133 @@
+{
+  "company": {
+    "name": "Grand Capital Financial",
+    "experienceYears": "15+",
+    "email": "grandcapital42@gmail.com",
+    "phone": "9284841551",
+    "whatsappUrl": "https://api.whatsapp.com/send?phone=9284841551",
+    "address": "Shop No.A-10, 2nd Floor, Prashant Complex, Opp BARC Gate, Chitralaya, Boisar 401501",
+    "googleMapsUrl": "https://maps.app.goo.gl/2gMgvfeoT79YkV6CA",
+    "workingHours": "MON-SAT 8:00-9:00",
+    "taglines": [
+      "Smart Loans for Bright Futures",
+      "Personal loans to fulfill your dreams",
+      "Our Loans will Make Your Dreams Come True",
+      "Leading the Best Loan Company"
+    ],
+    "about": "At Grand Capital Financial, we provide fast, secure, and flexible loan solutions to meet your financial needs. With transparent processes, competitive rates, and personalized service, we are committed to helping you achieve your goals quickly and efficiently."
+  },
+  "stats": [
+    { "label": "Happy Customers", "value": "8.5k" },
+    { "label": "Daily Payments", "value": "Rs 95k" },
+    { "label": "We Approve Loans", "value": "99%" },
+    { "label": "Staff Members", "value": "55+" }
+  ],
+  "services": [
+    {
+      "id": "instant-loan",
+      "title": "Instant Loan",
+      "description": "An instant loan provides quick access to funds, often approved within minutes. It’s typically offered online, requiring minimal documentation and fast processing. Interest rates can be high, so borrowers should carefully review terms before committing to ensure affordability."
+    },
+    {
+      "id": "personal-loan",
+      "title": "Personal Loan",
+      "description": "A personal loan is an unsecured loan used for various purposes, such as debt consolidation or home improvements. It typically has fixed interest rates and repayment terms. Borrowers should assess their financial situation before applying to ensure manageable repayments."
+    },
+    {
+      "id": "business-loan",
+      "title": "Business Loan",
+      "description": "A business loan provides funding to support a company's operations, growth, or expansion. It can be used for purchasing equipment, managing cash flow, or scaling operations. Terms, interest rates, and requirements vary, depending on the lender and the business's financial health."
+    },
+    {
+      "id": "home-loan",
+      "title": "Home Loan",
+      "description": "A home loan, or mortgage, helps individuals purchase property by borrowing funds from a lender. It usually features long-term repayment plans and fixed or variable interest rates. Borrowers must meet specific eligibility criteria and provide collateral, typically the home itself."
+    },
+    {
+      "id": "mudra-loan",
+      "title": "Mudra Loan",
+      "description": "A Mudra loan is a government-backed initiative in India aimed at supporting small businesses and entrepreneurs. Offered under the Pradhan Mantri Mudra Yojana (PMMY), it provides funding up to ₹10 lakh without collateral, helping micro-enterprises grow and enhance financial inclusion."
+    },
+    {
+      "id": "mortgage-loan",
+      "title": "Mortgage Loan",
+      "description": "A mortgage loan is a secured loan where property is used as collateral. It enables individuals to buy real estate by borrowing from a lender, typically repaid over long terms with fixed or adjustable interest rates. Defaulting risks losing the property."
+    },
+    {
+      "id": "life-insurance",
+      "title": "Life Insurance",
+      "description": "Life insurance provides financial protection to beneficiaries upon the policyholder's death. In exchange for regular premium payments, it ensures a payout, helping cover expenses like debts, education, or living costs. It offers peace of mind and long-term security."
+    },
+    {
+      "id": "health-insurance",
+      "title": "Health Insurance",
+      "description": "Health insurance provides financial coverage for medical expenses, including hospitalization, surgeries, and treatments. It helps reduce out-of-pocket costs during health emergencies, ensuring access to quality care and protecting against rising healthcare costs, offering peace of mind and security."
+    },
+    {
+      "id": "sip",
+      "title": "SIP (Systematic Investment Plan)",
+      "description": "A Systematic Investment Plan (SIP) allows investors to regularly invest small, fixed amounts in mutual funds offered by banks. It helps build wealth over time by averaging market volatility and encouraging disciplined, long-term investing, ideal for achieving financial goals."
+    }
+  ],
+  "loanCalculatorConfig": {
+    "defaultRate": 15,
+    "minAmount": 1000,
+    "maxAmount": 1200000,
+    "defaultAmount": 25000,
+    "minMonths": 1,
+    "maxMonths": 120,
+    "defaultMonths": 6
+  },
+  "processSteps": [
+    {
+      "step": 1,
+      "title": "Application submit",
+      "description": "The loan process begins with submitting a completed application, including required personal, financial, and employment information."
+    },
+    {
+      "step": 2,
+      "title": "Review & Verification",
+      "description": "Lenders carefully review the application, verifying all provided details, including income, credit score, and financial history."
+    },
+    {
+      "step": 3,
+      "title": "Loan Approval",
+      "description": "Upon successful verification, the lender assesses eligibility and grants loan approval based on the applicant's creditworthiness and financial standing."
+    },
+    {
+      "step": 4,
+      "title": "Loan disbursement",
+      "description": "Once approved, the loan amount is disbursed to the borrower, typically via bank transfer, completing the loan process."
+    }
+  ],
+  "team": [
+    { "name": "Sarah Mishra", "role": "Financial Advisor" },
+    { "name": "Santosh Jha", "role": "Loan Specialist" },
+    { "name": "Vikram Yadav", "role": "Senior Consultant" },
+    { "name": "Ram Tane", "role": "Relationship Manager" }
+  ],
+  "testimonials": [
+    {
+      "name": "Saurabh Yadav",
+      "quote": "The Loan Fund has been incredibly helpful to our company by providing a line of credit for our continued growth.",
+      "rating": 5
+    },
+    {
+      "name": "Pratham Pal",
+      "quote": "The Loan Fund has been a key partner in our success, and an invaluable asset for the growth and future of our company.",
+      "rating": 5
+    },
+    {
+      "name": "Naushad Shaikh",
+      "quote": "Anytime I’ve had an issue, I’ve reached out to The Loan Fund. They’ve been there from the start to help when I’ve needed it.",
+      "rating": 5
+    }
+  ],
+  "partners": [
+    "State Bank of India (SBI)",
+    "Punjab National Bank (PNB)",
+    "ICICI Bank",
+    "Kotak Mahindra Bank",
+    "Bajaj Finserv / LIC"
+  ]
+}

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Grand Capital Financial</title>
+  <meta name="description" content="Get in touch with Grand Capital Financial in Boisar. Contact via phone, email, or visit our office at Prashant Complex, Chitralaya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+  <script src="js/appwrite-client.js"></script>
+  <script>
+    // Unified Interface: Keep user on the comprehensive Shriram-style home page
+    window.location.replace("index.html#contact-us");
+  </script>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="topbar-info">
+        <div class="topbar-item">
+          <i class="fa-solid fa-location-dot text-secondary"></i>
+          <span>Shop No. A-10, Prashant Complex, Boisar 401501</span>
+        </div>
+        <div class="topbar-item">
+          <i class="fa-solid fa-phone text-secondary"></i>
+          <a href="tel:9284841551">+91 9284841551</a>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge-trust"><i class="fa-solid fa-award"></i> 15+ Years Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Loans & Services</a>
+        <a href="calculator.html" class="nav-link">EMI Calculator</a>
+        <a href="contact.html" class="nav-link active">Contact Us</a>
+      </nav>
+
+      <div class="nav-cta-group">
+        <a href="apply-loan.html" class="btn btn-secondary btn-sm">
+          <span>Apply Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <img src="header_logo_transparent.png" alt="Grand Capital Financial" class="brand-logo-img" style="height: 42px; object-fit: contain;">
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="about.html" class="mobile-nav-link"><i class="fa-solid fa-building"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Our Services</a>
+      <a href="calculator.html" class="mobile-nav-link"><i class="fa-solid fa-calculator"></i> EMI Calculator</a>
+      <a href="apply-loan.html" class="mobile-nav-link"><i class="fa-solid fa-file-signature"></i> Apply for Loan</a>
+      <a href="contact.html" class="mobile-nav-link active"><i class="fa-solid fa-phone"></i> Contact Us</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="apply-loan.html" class="drawer-apply-btn">
+        <i class="fa-solid fa-bolt"></i> Quick Loan Apply
+      </a>
+      <a href="tel:9284841551" class="drawer-contact-item">
+        <i class="fa-solid fa-phone"></i> +91 9284841551
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="drawer-contact-item">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </aside>
+
+  <!-- Header Banner -->
+  <section style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; padding: 48px 0; border-bottom: 3px solid var(--brand-yellow);">
+    <div class="container">
+      <span class="section-tag" style="background: var(--brand-yellow); color: #111; font-weight: 800;">CUSTOMER SUPPORT</span>
+      <h1 style="color: #FFFFFF; font-size: 2.25rem; font-weight: 700; margin-top: 8px;">Contact Us & Branch Details</h1>
+      <p style="color: #94A3B8; font-size: 0.95rem; margin-top: 6px;">
+        <a href="index.html" style="color: var(--brand-yellow); text-decoration: none;">Home</a> &bull; <span>Contact Us</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Information Grid -->
+  <section class="section-padding">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px;">
+        
+        <!-- Info Cards -->
+        <div>
+          <span class="section-tag">REACH OUR TEAM</span>
+          <h2 class="section-title">We Are Here To Assist You</h2>
+          <p style="color: var(--slate-600); line-height: 1.6; margin-bottom: 32px;">
+            Have questions about loan eligibility, interest rates, or insurance policies? Visit our Boisar office or contact our relationship managers directly.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Address Card -->
+            <div style="background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 16px; box-shadow: var(--shadow-sm);">
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-50); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Mailing Address</h4>
+                <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 8px;">
+                  Shop No. A-10, 2nd Floor, Prashant Complex, Opp BARC Gate, Chitralaya, Boisar 401501, Maharashtra, India.
+                </p>
+                <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="link-details">
+                  View on Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Phone Card -->
+            <div style="background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 16px; box-shadow: var(--shadow-sm);">
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--secondary-50); color: var(--secondary-hover); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Quick Contact</h4>
+                <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 4px;">Direct Phone / WhatsApp:</p>
+                <a href="tel:9284841551" style="font-size: 1.1rem; font-weight: 700; color: var(--primary);">+91 9284841551</a>
+              </div>
+            </div>
+
+            <!-- Email Card -->
+            <div style="background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 16px; box-shadow: var(--shadow-sm);">
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-50); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                <i class="fa-solid fa-envelope-open-text"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Support Email</h4>
+                <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 4px;">Official Correspondence:</p>
+                <a href="mailto:grandcapital42@gmail.com" style="font-size: 1.05rem; font-weight: 700; color: var(--primary);">grandcapital42@gmail.com</a>
+              </div>
+            </div>
+
+            <!-- Working Hours Card -->
+            <div style="background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 16px; box-shadow: var(--shadow-sm);">
+              <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--slate-100); color: var(--slate-700); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0;">
+                <i class="fa-solid fa-business-time"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Working Hours</h4>
+                <p style="font-size: 0.9rem; color: var(--slate-600); margin: 0;">
+                  Monday to Saturday: <strong>8:00 AM – 9:00 PM</strong><br>
+                  Sunday: Closed
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div style="background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-md);">
+          <span class="section-tag">LEAVE US A MESSAGE</span>
+          <h3 style="font-size: 1.6rem; color: var(--slate-900); margin-bottom: 12px;">Get a Fast Callback</h3>
+          <p style="color: var(--slate-500); font-size: 0.9rem; margin-bottom: 24px;">
+            Submit your inquiry and our executive will connect with you via WhatsApp or phone.
+          </p>
+
+          <form id="contactMessageForm">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label" for="contactName">Your Name *</label>
+                <input type="text" id="contactName" class="form-control" placeholder="e.g. Anand Patil" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactPhone">Phone Number *</label>
+                <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 9284841551" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">Email Address</label>
+                <input type="email" id="contactEmail" class="form-control" placeholder="e.g. anand@gmail.com">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="contactSubject">Interested Service</label>
+                <select id="contactSubject" class="form-control">
+                  <option value="Personal Loan">Personal Loan</option>
+                  <option value="Instant Loan">Instant Loan</option>
+                  <option value="Business Loan">Business Loan</option>
+                  <option value="Home Loan">Home Loan</option>
+                  <option value="Mudra Loan">Mudra Loan</option>
+                  <option value="Mortgage Loan">Mortgage Loan</option>
+                  <option value="Life Insurance">Life Insurance</option>
+                  <option value="Health Insurance">Health Insurance</option>
+                  <option value="SIP Plan">SIP Plan</option>
+                  <option value="Other Query">Other Query</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="contactMessage">Your Message</label>
+                <textarea id="contactMessage" class="form-control" rows="4" placeholder="How can we assist you today?"></textarea>
+              </div>
+
+              <div class="form-group full-width" style="margin-top: 12px;">
+                <button type="submit" class="btn btn-secondary btn-lg" style="width: 100%;">
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <span>Send Message via WhatsApp</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- CLEAN PROFESSIONAL GREY FOOTER -->
+  <footer class="shriram-footer" id="mainFooter">
+    <div class="container footer-main-content">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Contact -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand-header">
+            <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="footer-brand-logo">
+            <div>
+              <h3 class="footer-brand-title">Grand Capital Financial</h3>
+              <p class="footer-brand-tagline">Loan & Financial Advisory &bull; Boisar</p>
+            </div>
+          </div>
+          <div class="footer-social-row">
+            <a href="tel:9284841551" class="footer-social-btn" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="footer-social-btn footer-wa-btn" title="WhatsApp Us"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:info@grandcapital.in" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="footer-social-btn" title="Office Location in Boisar"><i class="fa-solid fa-location-dot"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Loan Products -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Loan Products</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Personal Loan')"><i class="fa-solid fa-chevron-right"></i> Personal Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Business Loan')"><i class="fa-solid fa-chevron-right"></i> Business Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Mudra Loan')"><i class="fa-solid fa-chevron-right"></i> Pradhan Mantri Mudra Loan</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Links & Tools -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links & Tools</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
+            <li><a href="#about-us"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
+            <li><a href="#loans-section"><i class="fa-solid fa-chevron-right"></i> All Financial Services</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> EMI Calculator</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> SIP Investment Planner</a></li>
+            <li><a href="#contact-us"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Boisar Branch Office & Contact -->
+        <div class="footer-col footer-col-contact">
+          <h4 class="footer-heading">Boisar Branch Office</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Office Location:</strong>
+              <span>Near BARC Gate, Chitralaya, Boisar West, Palghar - 401501</span>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Helpline / Mobile:</strong>
+              <a href="tel:9284841551">+91 9284841551</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+              <strong>Working Hours:</strong>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 7:30 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Disclaimer -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-flex">
+        <div class="footer-bottom-left">
+          <span>&copy; 2026 Grand Capital Financial Services. All rights reserved.</span>
+          <span class="footer-disclaimer-text">Grand Capital Financial Services is an authorized loan facilitator and direct selling agent (DSA) for RBI-registered scheduled commercial banks and NBFCs. We do not charge upfront fees for loan processing.</span>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#about-us">Privacy Policy</a>
+          <span class="sep">&bull;</span>
+          <a href="#about-us">Terms & Conditions</a>
+          <span class="sep">&bull;</span>
+          <a href="#contact-us">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-whatsapp">
+    <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="whatsapp-btn" aria-label="Contact on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactMessageForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      const phone = document.getElementById('contactPhone').value;
+      const email = document.getElementById('contactEmail').value;
+      const service = document.getElementById('contactSubject').value;
+      const msg = document.getElementById('contactMessage').value;
+
+      // Save to Appwrite Cloud & Local Storage
+      if (typeof saveLeadToCloud === 'function') {
+        saveLeadToCloud({
+          name: name,
+          phone: phone,
+          loanType: service || 'General Inquiry',
+          amount: 'Inquiry',
+          location: 'Boisar Contact Form'
+        });
+      }
+
+      const whatsappText = `*Grand Capital Financial - New Inquiry*%0A%0A` +
+        `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+        `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+        `📧 *Email:* ${encodeURIComponent(email || 'N/A')}%0A` +
+        `💼 *Service:* ${encodeURIComponent(service)}%0A` +
+        `💬 *Message:* ${encodeURIComponent(msg || 'Requesting callback')}`;
+
+      window.open(`https://api.whatsapp.com/send?phone=919284841551&text=${whatsappText}`, '_blank');
+      alert('Thank you ' + name + '! Your inquiry has been sent successfully.');
+    });
+  </script>
+</body>
+</html>

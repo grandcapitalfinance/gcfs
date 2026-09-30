@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan EMI Calculator | Grand Capital Financial</title>
+  <meta name="description" content="Calculate your loan monthly installments (EMI), total interest, and payback amount with our accurate online loan calculator at Grand Capital Financial.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    // Unified Interface: Keep user on index.html calculator
+    window.location.replace("index.html#calculator");
+  </script>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="topbar-info">
+        <div class="topbar-item">
+          <i class="fa-solid fa-location-dot text-secondary"></i>
+          <span>Shop No. A-10, Prashant Complex, Boisar 401501</span>
+        </div>
+        <div class="topbar-item">
+          <i class="fa-solid fa-phone text-secondary"></i>
+          <a href="tel:9284841551">+91 9284841551</a>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge-trust"><i class="fa-solid fa-award"></i> 15+ Years Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about-us" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Loans & Services</a>
+        <a href="calculator.html" class="nav-link active">EMI Calculator</a>
+        <a href="index.html#contact-us" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="nav-cta-group">
+        <a href="apply-loan.html" class="btn btn-secondary btn-sm">
+          <span>Apply Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <img src="header_logo_transparent.png" alt="Grand Capital Financial" class="brand-logo-img" style="height: 42px; object-fit: contain;">
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="index.html#about-us" class="mobile-nav-link"><i class="fa-solid fa-building"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Our Services</a>
+      <a href="calculator.html" class="mobile-nav-link active"><i class="fa-solid fa-calculator"></i> EMI Calculator</a>
+      <a href="apply-loan.html" class="mobile-nav-link"><i class="fa-solid fa-file-signature"></i> Apply for Loan</a>
+      <a href="index.html#contact-us" class="mobile-nav-link"><i class="fa-solid fa-phone"></i> Contact Us</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="apply-loan.html" class="drawer-apply-btn">
+        <i class="fa-solid fa-bolt"></i> Quick Loan Apply
+      </a>
+      <a href="tel:9284841551" class="drawer-contact-item">
+        <i class="fa-solid fa-phone"></i> +91 9284841551
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="drawer-contact-item">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </aside>
+
+  <!-- Page Header -->
+  <section style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; padding: 48px 0; border-bottom: 3px solid var(--brand-yellow);">
+    <div class="container">
+      <span class="section-tag" style="background: var(--brand-yellow); color: #111; font-weight: 800;">FINANCIAL PLANNING TOOL</span>
+      <h1 style="color: #FFFFFF; font-size: 2.25rem; font-weight: 700; margin-top: 8px;">Online Loan EMI Calculator</h1>
+      <p style="color: #94A3B8; font-size: 0.95rem; margin-top: 6px;">
+        <a href="index.html" style="color: var(--brand-yellow); text-decoration: none;">Home</a> &bull; <span>EMI Calculator</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Calculator Component Section -->
+  <section class="section-padding" style="background-color: var(--slate-50);">
+    <div class="container">
+      <div class="calculator-wrapper">
+        <!-- Controls Column -->
+        <div class="calc-controls-col">
+          <h2 style="font-size: 1.75rem; margin-bottom: 24px; color: var(--primary);">Calculate Your Repayment</h2>
+
+          <!-- Loan Amount -->
+          <div class="calc-slider-block">
+            <div class="calc-header-row">
+              <span class="calc-field-title">Loan Amount Required</span>
+              <input type="number" id="mainCalcAmountInput" class="calc-input-box" value="25000" min="1000" max="1200000" step="5000">
+            </div>
+            <input type="range" class="custom-range" id="mainCalcAmount" min="1000" max="1200000" step="5000" value="25000">
+            <div class="slider-range-limits">
+              <span>₹1,000</span>
+              <span>₹12,00,000</span>
+            </div>
+          </div>
+
+          <!-- Tenure in Months -->
+          <div class="calc-slider-block">
+            <div class="calc-header-row">
+              <span class="calc-field-title">Tenure (Duration in Months)</span>
+              <input type="number" id="mainCalcTenureInput" class="calc-input-box" value="6" min="1" max="120">
+            </div>
+            <input type="range" class="custom-range" id="mainCalcTenure" min="1" max="120" step="1" value="6">
+            <div class="slider-range-limits">
+              <span>1 Month</span>
+              <span>120 Months (10 Years)</span>
+            </div>
+          </div>
+
+          <!-- Interest Rate -->
+          <div class="calc-slider-block">
+            <div class="calc-header-row">
+              <span class="calc-field-title">Interest Rate (% p.a.)</span>
+              <input type="number" id="mainCalcRateInput" class="calc-input-box" value="15" min="8" max="36" step="0.5">
+            </div>
+            <input type="range" class="custom-range" id="mainCalcRate" min="8" max="36" step="0.5" value="15">
+            <div class="slider-range-limits">
+              <span>8% p.a.</span>
+              <span>36% p.a.</span>
+            </div>
+          </div>
+
+          <div style="background: var(--slate-100); border-radius: var(--radius-md); padding: 16px; font-size: 0.85rem; color: var(--slate-600); line-height: 1.6;">
+            <strong>Formula Used:</strong> EMI = [P x R x (1+R)^N]/[(1+R)^N-1], where P is Principal, R is monthly interest rate, and N is the number of monthly installments.
+          </div>
+        </div>
+
+        <!-- Output Column -->
+        <div class="calc-display-col">
+          <div class="calc-display-header">
+            <div class="calc-display-subtitle">Your Monthly EMI</div>
+            <div class="calc-monthly-emi" id="mainDisplayEmi">₹4,791</div>
+            <div style="font-size: 0.85rem; color: var(--slate-300); margin-top: 4px;">Payable per month</div>
+          </div>
+
+          <div class="calc-breakdown-list">
+            <div class="calc-breakdown-row">
+              <span style="color: var(--slate-300);">Principal Amount:</span>
+              <span id="mainDisplayPrincipal" style="font-weight: 700;">₹25,000</span>
+            </div>
+            <div class="calc-breakdown-row">
+              <span style="color: var(--slate-300);">Total Interest:</span>
+              <span id="mainDisplayInterest" style="font-weight: 700; color: var(--secondary);">₹3,750</span>
+            </div>
+            <div class="calc-breakdown-row border-top">
+              <span>Total Payable:</span>
+              <span id="mainDisplayTotal" style="color: #FCD34D;">₹28,750</span>
+            </div>
+          </div>
+
+          <a href="apply-loan.html" class="btn btn-secondary btn-lg" style="width: 100%;">
+            <span>Apply For This Loan Now</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CLEAN PROFESSIONAL GREY FOOTER -->
+  <footer class="shriram-footer" id="mainFooter">
+    <div class="container footer-main-content">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Contact -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand-header">
+            <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="footer-brand-logo">
+            <div>
+              <h3 class="footer-brand-title">Grand Capital Financial</h3>
+              <p class="footer-brand-tagline">Loan & Financial Advisory &bull; Boisar</p>
+            </div>
+          </div>
+          <div class="footer-social-row">
+            <a href="tel:9284841551" class="footer-social-btn" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="footer-social-btn footer-wa-btn" title="WhatsApp Us"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:info@grandcapital.in" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="footer-social-btn" title="Office Location in Boisar"><i class="fa-solid fa-location-dot"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Loan Products -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Loan Products</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Personal Loan')"><i class="fa-solid fa-chevron-right"></i> Personal Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Business Loan')"><i class="fa-solid fa-chevron-right"></i> Business Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Mudra Loan')"><i class="fa-solid fa-chevron-right"></i> Pradhan Mantri Mudra Loan</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Links & Tools -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links & Tools</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
+            <li><a href="#about-us"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
+            <li><a href="#loans-section"><i class="fa-solid fa-chevron-right"></i> All Financial Services</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> EMI Calculator</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> SIP Investment Planner</a></li>
+            <li><a href="#contact-us"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Boisar Branch Office & Contact -->
+        <div class="footer-col footer-col-contact">
+          <h4 class="footer-heading">Boisar Branch Office</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Office Location:</strong>
+              <span>Near BARC Gate, Chitralaya, Boisar West, Palghar - 401501</span>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Helpline / Mobile:</strong>
+              <a href="tel:9284841551">+91 9284841551</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+              <strong>Working Hours:</strong>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 7:30 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Disclaimer -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-flex">
+        <div class="footer-bottom-left">
+          <span>&copy; 2026 Grand Capital Financial Services. All rights reserved.</span>
+          <span class="footer-disclaimer-text">Grand Capital Financial Services is an authorized loan facilitator and direct selling agent (DSA) for RBI-registered scheduled commercial banks and NBFCs. We do not charge upfront fees for loan processing.</span>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#about-us">Privacy Policy</a>
+          <span class="sep">&bull;</span>
+          <a href="#about-us">Terms & Conditions</a>
+          <span class="sep">&bull;</span>
+          <a href="#contact-us">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-whatsapp">
+    <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="whatsapp-btn" aria-label="Contact on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

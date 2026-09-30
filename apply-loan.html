@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Loan | Grand Capital Financial</title>
+  <meta name="description" content="Apply for instant, personal, business, mudra, home, and mortgage loans online at Grand Capital Financial. Instant approval with minimal documentation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    // Unified Interface: Keep user on the unified home page and open application modal
+    const urlParams = new URLSearchParams(window.location.search);
+    const loanType = urlParams.get('type') || 'Personal Loan';
+    window.location.replace("index.html?apply=" + encodeURIComponent(loanType));
+  </script>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-content">
+      <div class="topbar-info">
+        <div class="topbar-item">
+          <i class="fa-solid fa-location-dot text-secondary"></i>
+          <span>Shop No. A-10, Prashant Complex, Boisar 401501</span>
+        </div>
+        <div class="topbar-item">
+          <i class="fa-solid fa-phone text-secondary"></i>
+          <a href="tel:9284841551">+91 9284841551</a>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge-trust"><i class="fa-solid fa-award"></i> 15+ Years Trust</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand-logo">
+        <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about-us" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link">Loans & Services</a>
+        <a href="calculator.html" class="nav-link">EMI Calculator</a>
+        <a href="index.html#contact-us" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="nav-cta-group">
+        <a href="apply-loan.html" class="btn btn-secondary btn-sm">
+          <span>Apply Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="mobile-drawer-header">
+      <img src="header_logo_transparent.png" alt="Grand Capital Financial" class="brand-logo-img" style="height: 42px; object-fit: contain;">
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="index.html#about-us" class="mobile-nav-link"><i class="fa-solid fa-building"></i> About Us</a>
+      <a href="services.html" class="mobile-nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Our Services</a>
+      <a href="calculator.html" class="mobile-nav-link"><i class="fa-solid fa-calculator"></i> EMI Calculator</a>
+      <a href="apply-loan.html" class="mobile-nav-link active"><i class="fa-solid fa-file-signature"></i> Apply for Loan</a>
+      <a href="index.html#contact-us" class="mobile-nav-link"><i class="fa-solid fa-phone"></i> Contact Us</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="apply-loan.html" class="drawer-apply-btn">
+        <i class="fa-solid fa-bolt"></i> Quick Loan Apply
+      </a>
+      <a href="tel:9284841551" class="drawer-contact-item">
+        <i class="fa-solid fa-phone"></i> +91 9284841551
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="drawer-contact-item">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </aside>
+
+  <!-- Header Banner -->
+  <section style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #FFFFFF; padding: 48px 0; border-bottom: 3px solid var(--brand-yellow);">
+    <div class="container">
+      <span class="section-tag" style="background: var(--brand-yellow); color: #111; font-weight: 800;">ONLINE APPLICATION</span>
+      <h1 style="color: #FFFFFF; font-size: 2.25rem; font-weight: 700; margin-top: 8px;">Apply for Quick Loan Approval</h1>
+      <p style="color: #94A3B8; font-size: 0.95rem; margin-top: 6px;">
+        <a href="index.html" style="color: var(--brand-yellow); text-decoration: none;">Home</a> &bull; <span>Apply for Loan</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Application Form Section -->
+  <section class="section-padding" style="background-color: var(--slate-50);">
+    <div class="container" style="max-width: 800px;">
+      <div style="background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--slate-200); padding: 40px; box-shadow: var(--shadow-lg);">
+        
+        <div style="margin-bottom: 32px; border-bottom: 1px solid var(--slate-200); padding-bottom: 20px;">
+          <h2 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 8px;">Loan Application Form</h2>
+          <p style="color: var(--slate-600); font-size: 0.95rem;">
+            Please provide your details below. Once submitted, our team in Boisar will review your profile and contact you within minutes.
+          </p>
+        </div>
+
+        <form id="fullLoanForm">
+          <!-- Step 1: Loan Type -->
+          <div style="margin-bottom: 32px;">
+            <h3 style="font-size: 1.2rem; color: var(--slate-900); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: var(--secondary); color: var(--slate-900); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">1</span>
+              Loan Type & Requirements
+            </h3>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="loanCategory">Select Loan / Product *</label>
+                <select id="loanCategory" class="form-control" required>
+                  <option value="Instant Loan">Instant Loan</option>
+                  <option value="Personal Loan" selected>Personal Loan</option>
+                  <option value="Business Loan">Business Loan</option>
+                  <option value="Home Loan">Home Loan</option>
+                  <option value="Mudra Loan">Mudra Loan</option>
+                  <option value="Mortgage Loan">Mortgage Loan</option>
+                  <option value="Life Insurance">Life Insurance</option>
+                  <option value="Health Insurance">Health Insurance</option>
+                  <option value="SIP">SIP (Investment Plan)</option>
+                  <option value="Bike Loan">Bike Loan</option>
+                  <option value="Abroad Study Loan">Abroad Study Loan</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqAmount">Desired Loan Amount (₹) *</label>
+                <input type="number" id="reqAmount" class="form-control" placeholder="e.g. 100000" min="1000" max="1200000" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqTenure">Preferred Tenure</label>
+                <select id="reqTenure" class="form-control">
+                  <option value="6 Months">6 Months</option>
+                  <option value="12 Months (1 Year)">12 Months (1 Year)</option>
+                  <option value="24 Months (2 Years)">24 Months (2 Years)</option>
+                  <option value="36 Months (3 Years)">36 Months (3 Years)</option>
+                  <option value="60 Months (5 Years)">60 Months (5 Years)</option>
+                  <option value="120 Months (10 Years)">120 Months (10 Years)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="purpose">Purpose of Loan</label>
+                <select id="purpose" class="form-control">
+                  <option value="Personal Use">Personal Use</option>
+                  <option value="Home Purchase / Renovation">Home Purchase / Renovation</option>
+                  <option value="Debt Consolidation">Debt Consolidation</option>
+                  <option value="Medical Expenses">Medical Expenses</option>
+                  <option value="Business Expansion">Business Expansion</option>
+                  <option value="Education">Education</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Personal Details -->
+          <div style="margin-bottom: 32px;">
+            <h3 style="font-size: 1.2rem; color: var(--slate-900); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: var(--secondary); color: var(--slate-900); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">2</span>
+              Personal Details
+            </h3>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="fullName">Full Name (as per Aadhaar/PAN) *</label>
+                <input type="text" id="fullName" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="mobileNumber">Mobile Number (WhatsApp) *</label>
+                <input type="tel" id="mobileNumber" class="form-control" placeholder="e.g. 9284841551" pattern="[0-9]{10}" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="emailAddress">Email Address</label>
+                <input type="email" id="emailAddress" class="form-control" placeholder="e.g. yourname@gmail.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="empType">Employment Status</label>
+                <select id="empType" class="form-control">
+                  <option value="Salaried">Salaried</option>
+                  <option value="Self Employed / Business">Self Employed / Business</option>
+                  <option value="Professional (Doctor, CA)">Professional (Doctor, CA)</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Address Details -->
+          <div style="margin-bottom: 32px;">
+            <h3 style="font-size: 1.2rem; color: var(--slate-900); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <span style="background: var(--secondary); color: var(--slate-900); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800;">3</span>
+              Address Details
+            </h3>
+
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label class="form-label" for="addressLine">Street Address / Landmark</label>
+                <input type="text" id="addressLine" class="form-control" placeholder="e.g. Prashant Complex, Chitralaya">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="city">City / Town *</label>
+                <input type="text" id="city" class="form-control" value="Boisar" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="pincode">Pincode</label>
+                <input type="text" id="pincode" class="form-control" value="401501">
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div style="margin-top: 32px;">
+            <button type="submit" class="btn btn-secondary btn-lg" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i>
+              <span>Apply on WhatsApp</span>
+            </button>
+            <p style="font-size: 0.8rem; color: var(--slate-500); text-align: center; margin-top: 12px;">
+              Our loan manager will review your submission and initiate verification immediately.
+            </p>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+  <!-- CLEAN PROFESSIONAL GREY FOOTER -->
+  <footer class="shriram-footer" id="mainFooter">
+    <div class="container footer-main-content">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Contact -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand-header">
+            <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="footer-brand-logo">
+            <div>
+              <h3 class="footer-brand-title">Grand Capital Financial</h3>
+              <p class="footer-brand-tagline">Loan & Financial Advisory &bull; Boisar</p>
+            </div>
+          </div>
+          <div class="footer-social-row">
+            <a href="tel:9284841551" class="footer-social-btn" title="Call Us"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="footer-social-btn footer-wa-btn" title="WhatsApp Us"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="mailto:info@grandcapital.in" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="footer-social-btn" title="Office Location in Boisar"><i class="fa-solid fa-location-dot"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Loan Products -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Loan Products</h4>
+          <ul class="footer-links-list">
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Personal Loan')"><i class="fa-solid fa-chevron-right"></i> Personal Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Business Loan')"><i class="fa-solid fa-chevron-right"></i> Business Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Mudra Loan')"><i class="fa-solid fa-chevron-right"></i> Pradhan Mantri Mudra Loan</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Links & Tools -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links & Tools</h4>
+          <ul class="footer-links-list">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
+            <li><a href="#about-us"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
+            <li><a href="#loans-section"><i class="fa-solid fa-chevron-right"></i> All Financial Services</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> EMI Calculator</a></li>
+            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> SIP Investment Planner</a></li>
+            <li><a href="#contact-us"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Boisar Branch Office & Contact -->
+        <div class="footer-col footer-col-contact">
+          <h4 class="footer-heading">Boisar Branch Office</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Office Location:</strong>
+              <span>Near BARC Gate, Chitralaya, Boisar West, Palghar - 401501</span>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Helpline / Mobile:</strong>
+              <a href="tel:9284841551">+91 9284841551</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+              <strong>Working Hours:</strong>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 7:30 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Disclaimer -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-flex">
+        <div class="footer-bottom-left">
+          <span>&copy; 2026 Grand Capital Financial Services. All rights reserved.</span>
+          <span class="footer-disclaimer-text">Grand Capital Financial Services is an authorized loan facilitator and direct selling agent (DSA) for RBI-registered scheduled commercial banks and NBFCs. We do not charge upfront fees for loan processing.</span>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#about-us">Privacy Policy</a>
+          <span class="sep">&bull;</span>
+          <a href="#about-us">Terms & Conditions</a>
+          <span class="sep">&bull;</span>
+          <a href="#contact-us">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="floating-whatsapp">
+    <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="whatsapp-btn" aria-label="Contact on WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('fullLoanForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const loan = document.getElementById('loanCategory').value;
+      const amount = document.getElementById('reqAmount').value;
+      const tenure = document.getElementById('reqTenure').value;
+      const purpose = document.getElementById('purpose').value;
+      const name = document.getElementById('fullName').value;
+      const phone = document.getElementById('mobileNumber').value;
+      const email = document.getElementById('emailAddress').value;
+      const emp = document.getElementById('empType').value;
+      const city = document.getElementById('city').value;
+      const pincode = document.getElementById('pincode').value;
+
+      // Save to Appwrite Cloud & Local Storage
+      if (typeof saveLeadToCloud === 'function') {
+        saveLeadToCloud({
+          name: name,
+          phone: phone,
+          loanType: loan,
+          amount: amount,
+          location: (city || 'Boisar') + (pincode ? ' (' + pincode + ')' : '')
+        });
+      }
+
+      const message = `*Grand Capital Financial - New Loan Application*%0A%0A` +
+        `💼 *Product:* ${encodeURIComponent(loan)}%0A` +
+        `💰 *Amount:* ₹${encodeURIComponent(amount)}%0A` +
+        `⏳ *Tenure:* ${encodeURIComponent(tenure)}%0A` +
+        `🎯 *Purpose:* ${encodeURIComponent(purpose)}%0A%0A` +
+        `*Applicant Details:*%0A` +
+        `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+        `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+        `📧 *Email:* ${encodeURIComponent(email || 'N/A')}%0A` +
+        `💼 *Employment:* ${encodeURIComponent(emp)}%0A` +
+        `📍 *Location:* ${encodeURIComponent(city)} (${encodeURIComponent(pincode)})`;
+
+      window.open(`https://api.whatsapp.com/send?phone=919284841551&text=${message}`, '_blank');
+      alert('Thank you ' + name + '! Your application for ' + loan + ' has been submitted successfully.');
+    });
+  </script>
+</body>
+</html>

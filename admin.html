@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Leads Dashboard | Grand Capital Financial Boisar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+  <script src="js/appwrite-client.js"></script>
+  <style>
+    body {
+      background-color: #ECEFF2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-navbar {
+      background: #111111;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3.5px solid var(--brand-yellow);
+      gap: 12px;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admin-brand img {
+      height: 32px;
+      background: #FFFFFF;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .admin-brand-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.2px;
+    }
+
+    .admin-brand-badge {
+      background: var(--brand-yellow);
+      color: #111111;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-icon-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .nav-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .cloud-sync-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 7px;
+      height: 7px;
+      background: #10B981;
+      border-radius: 50%;
+      border: 1.5px solid #111111;
+      animation: pulseDot 1.5s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .nav-website-btn {
+      color: #E2E8F0;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 7px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-website-btn:hover {
+      background: var(--brand-yellow);
+      color: #111111;
+      border-color: var(--brand-yellow);
+    }
+
+    /* Login Lock Screen */
+    .lock-screen-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 24px 16px;
+    }
+
+    .lock-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 38px 28px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      border: 1px solid #E2E8F0;
+      border-top: 5px solid var(--brand-yellow);
+    }
+
+    .lock-icon-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #FFFBEB;
+      color: #D97706;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12);
+    }
+
+    .pin-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      font-size: 1.3rem;
+      text-align: center;
+      letter-spacing: 8px;
+      margin-bottom: 18px;
+      outline: none;
+      background: #F8FAFC;
+      transition: all 0.2s ease;
+    }
+
+    .pin-input:focus {
+      background: #FFFFFF;
+      border-color: #F59E0B;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Dashboard Main Container */
+    .dashboard-container {
+      display: none;
+      padding: 24px 20px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Metric Cards */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: #FFFFFF;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border-bottom: 3.5px solid var(--brand-yellow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-info h5 {
+      font-size: 0.75rem;
+      color: #666666;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-number {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .metric-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #FFF8E1;
+      color: #D97706;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    /* Table Toolbar */
+    .table-toolbar {
+      background: #FFFFFF;
+      border-radius: 12px 12px 0 0;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      border: 1px solid #E5E9EC;
+      border-bottom: none;
+    }
+
+    .search-filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .admin-search-input {
+      padding: 8px 14px;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+      width: 220px;
+    }
+
+    .admin-filter-select {
+      padding: 8px 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+      background: #FFFFFF;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-export {
+      background: #10B981;
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-export:hover {
+      background: #059669;
+    }
+
+    .btn-clear {
+      background: #EF4444;
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* Leads Table */
+    .leads-table-wrapper {
+      background: #FFFFFF;
+      border: 1px solid #E5E9EC;
+      border-radius: 0 0 12px 12px;
+      overflow-x: auto;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .leads-table th {
+      background: #F8FAFC;
+      color: #475569;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid #E2E8F0;
+      white-space: nowrap;
+    }
+
+    .leads-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #F1F5F9;
+      color: #1E293B;
+      vertical-align: middle;
+    }
+
+    .leads-table tr:hover {
+      background: #FFFDF5;
+    }
+
+    .loan-badge {
+      background: #FEF3C7;
+      color: #B45309;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      text-decoration: none;
+      margin-right: 4px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-call { background: #2563EB; }
+    .btn-wa { background: #22C55E; }
+    .btn-del { background: #EF4444; }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        padding: 14px 12px 30px;
+      }
+      .admin-navbar {
+        padding: 10px 14px;
+      }
+      .admin-brand img {
+        height: 28px;
+      }
+      .admin-brand-title {
+        font-size: 0.9rem;
+      }
+      .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .metric-card {
+        padding: 12px 14px;
+        border-radius: 10px;
+      }
+      .metric-number {
+        font-size: 1.35rem;
+      }
+      .metric-icon-box {
+        width: 36px;
+        height: 36px;
+        font-size: 1.05rem;
+      }
+      .table-toolbar {
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #E5E9EC;
+      }
+      .search-filter-group {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .admin-search-input, .admin-filter-select {
+        width: 100%;
+        font-size: 0.9rem;
+      }
+      .toolbar-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .btn-export {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 14px;
+      }
+      .btn-clear {
+        padding: 10px 14px;
+      }
+
+      /* Clean Mobile Lead Cards (Perfect for MI Mobile / Touch Screens) */
+      .leads-table-wrapper {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+      }
+      .leads-table thead {
+        display: none;
+      }
+      .leads-table, .leads-table tbody {
+        display: block;
+        width: 100%;
+      }
+      .leads-table tr {
+        display: block;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        padding: 14px 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .leads-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0;
+        border-bottom: 1px solid #F1F5F9;
+        font-size: 0.88rem;
+      }
+      .leads-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #64748B;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      .leads-table td:last-child {
+        border-bottom: none;
+        padding-top: 12px;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+      .leads-table td:last-child::before {
+        display: none;
+      }
+      .action-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Navbar -->
+  <nav class="admin-navbar">
+    <div class="admin-brand">
+      <img src="header_logo_transparent.png" alt="Grand Capital Financial">
+      <span class="admin-brand-title">Grand Capital</span>
+      <span class="admin-brand-badge">LEADS ADMIN</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button class="nav-icon-btn" onclick="openSecurityModal()" title="Security & Change PIN">
+        <i class="fa-solid fa-shield-halved"></i>
+      </button>
+      <button class="nav-icon-btn" onclick="openCloudConfigModal()" title="Cloud & Sync Settings" id="cloudSyncStatusBadge">
+        <span class="cloud-sync-dot" id="cloudSyncDot"></span>
+        <i class="fa-solid fa-cloud"></i>
+      </button>
+      <button class="nav-website-btn" id="logoutBtn" onclick="lockAdmin()" style="display: none;" title="Lock Admin Portal">
+        <i class="fa-solid fa-lock"></i>
+        <span>Lock</span>
+      </button>
+      <a href="index.html" class="nav-website-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Website</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Login Lock Screen -->
+  <div class="lock-screen-container" id="lockScreen">
+    <div class="lock-card">
+      <div class="lock-icon-circle">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 8px;">Admin Leads Portal</h3>
+      <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
+        Enter your secret Admin PIN to view customer loan applications.
+      </p>
+
+      <form id="pinForm" onsubmit="unlockAdmin(event)">
+        <input type="password" id="adminPinInput" class="pin-input" placeholder="••••" maxlength="8" autocomplete="off" autofocus required>
+        <button type="submit" id="unlockBtn" class="btn-yellow-pill" style="width: 100%; justify-content: center; font-size: 0.95rem; font-weight: 600;">
+          <span>Unlock Dashboard</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+      <div id="pinErrorMsg" style="color: #EF4444; font-size: 0.82rem; margin-top: 12px; display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Dashboard Main Container -->
+  <main class="dashboard-container" id="dashboardMain">
+    
+    <!-- Metrics Row -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-info">
+          <h5>Total Leads</h5>
+          <div class="metric-number" id="metricTotal">0</div>
+        </div>
+        <div class="metric-icon-box"><i class="fa-solid fa-users"></i></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-info">
+          <h5>Personal Loans</h5>
+          <div class="metric-number" id="metricPersonal">0</div>
+        </div>
+        <div class="metric-icon-box"><i class="fa-solid fa-wallet"></i></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-info">
+          <h5>Business Loans</h5>
+          <div class="metric-number" id="metricBusiness">0</div>
+        </div>
+        <div class="metric-icon-box"><i class="fa-solid fa-store"></i></div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-info">
+          <h5>Instant Loans</h5>
+          <div class="metric-number" id="metricInstant">0</div>
+        </div>
+        <div class="metric-icon-box"><i class="fa-solid fa-bolt"></i></div>
+      </div>
+    </div>
+
+    <!-- Table Toolbar -->
+    <div class="table-toolbar">
+      <div class="search-filter-group">
+        <input type="text" id="searchInput" class="admin-search-input" placeholder="Search by Name or Phone..." oninput="renderLeadsTable()">
+        <select id="filterLoanType" class="admin-filter-select" onchange="renderLeadsTable()">
+          <option value="ALL">All Services</option>
+          <option value="Personal Loan">Personal Loan</option>
+          <option value="Business Loan">Business Loan</option>
+          <option value="Instant Loan">Instant Loan</option>
+          <option value="Home Loan">Home Loan</option>
+          <option value="Mudra Loan">Mudra Loan</option>
+          <option value="Mortgage Loan">Mortgage Loan</option>
+          <option value="Life Insurance">Life Insurance</option>
+          <option value="Health Insurance">Health Insurance</option>
+          <option value="SIP">SIP</option>
+        </select>
+      </div>
+
+      <div class="toolbar-actions">
+        <button class="btn-export" onclick="exportToExcel()">
+          <i class="fa-solid fa-file-excel"></i>
+          <span>Download Excel</span>
+        </button>
+        <button class="btn-clear" onclick="clearAllLeads()" title="Delete all leads">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Leads Table -->
+    <div class="leads-table-wrapper">
+      <table class="leads-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date & Time</th>
+            <th>Customer Name</th>
+            <th>Phone / WhatsApp</th>
+            <th>Service Requested</th>
+            <th>Amount (₹)</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTableBody">
+          <!-- Dynamically Rendered -->
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Appwrite Cloud Configuration Modal -->
+  <div id="cloudConfigModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #FFFFFF; border-radius: 14px; max-width: 550px; width: 100%; padding: 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; max-height: 90vh; overflow-y: auto;">
+      <button onclick="closeCloudConfigModal()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #64748B;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+        <div style="width: 38px; height: 38px; border-radius: 8px; background: #FFF8E1; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.15rem;">
+          <i class="fa-solid fa-cloud"></i>
+        </div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: #0F172A; margin: 0;">Appwrite Cloud Configuration</h3>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #475569; line-height: 1.5; margin-bottom: 16px;">
+        100% Free Lifetime Cloud Database (never pauses/sleeps). All customer leads automatically sync here.
+      </p>
+
+      <div style="display: grid; gap: 12px; margin-bottom: 20px;">
+        <div>
+          <label style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Endpoint</label>
+          <input type="text" id="cfgEndpoint" style="width: 100%; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 0.85rem; background: #F8FAFC;" readonly>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Project ID</label>
+          <input type="text" id="cfgProjectId" style="width: 100%; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 0.85rem; background: #F8FAFC;" readonly>
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Database ID</label>
+          <input type="text" id="cfgDatabaseId" style="width: 100%; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 0.85rem;" placeholder="gcfs_database">
+        </div>
+        <div>
+          <label style="font-size: 0.72rem; font-weight: 700; color: #64748B; text-transform: uppercase;">Collection ID</label>
+          <input type="text" id="cfgCollectionId" style="width: 100%; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 0.85rem;" placeholder="leads">
+        </div>
+      </div>
+
+      <!-- Quick Setup Instructions -->
+      <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 16px; margin-bottom: 18px; font-size: 0.8rem; color: #334155; line-height: 1.6;">
+        <strong style="color: #0F172A; display: block; margin-bottom: 6px;"><i class="fa-solid fa-circle-info" style="color: #2563EB;"></i> Appwrite Console Setup Guide:</strong>
+        <ol style="margin: 0; padding-left: 18px;">
+          <li>Log into <strong>cloud.appwrite.io</strong> & select project <code>6abcf17f003452017081</code></li>
+          <li>Click <strong>Databases</strong> &gt; <strong>Create database</strong> &gt; ID: <code>gcfs_database</code></li>
+          <li>Inside it, click <strong>Create collection</strong> &gt; ID: <code>leads</code></li>
+          <li>In Collection <strong>Settings &gt; Permissions</strong>, add Role: <strong>Any</strong>, check <strong>Create</strong> & <strong>Read</strong></li>
+          <li>In <strong>Attributes</strong>, add String attributes: <code>name</code>, <code>phone</code>, <code>loanType</code>, <code>amount</code>, <code>location</code>, <code>date</code></li>
+        </ol>
+      </div>
+
+      <div id="testResultMsg" style="margin-bottom: 14px; font-size: 0.85rem; font-weight: 600; display: none;"></div>
+
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button type="button" onclick="testAppwriteConnection()" style="background: #F1F5F9; color: #0F172A; border: 1px solid #CBD5E1; padding: 9px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+          <i class="fa-solid fa-arrows-rotate"></i> Test Connection
+        </button>
+        <button type="button" onclick="saveCloudConfig()" style="background: var(--brand-yellow); color: #111111; border: none; padding: 9px 18px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
+          Save & Sync
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECURITY & CHANGE PIN MODAL -->
+  <div class="modal-overlay" id="securityModal" style="display: none; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 3000; padding: 16px;">
+    <div class="modal-box" style="max-width: 400px; padding: 28px 24px; border-radius: 18px; background: #fff; position: relative;">
+      <button class="modal-close-x" onclick="closeSecurityModal()">&times;</button>
+      <div style="font-size: 0.78rem; font-weight: 700; color: #B45309; text-transform: uppercase; margin-bottom: 4px;">
+        SECURITY SETTINGS
+      </div>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: #111; margin-bottom: 12px;">Change Admin PIN</h3>
+      <p style="font-size: 0.84rem; color: #64748B; margin-bottom: 18px; line-height: 1.5;">
+        Your PIN is encrypted with military-grade SHA-256. It is never visible in Inspect or page source code.
+      </p>
+      <form onsubmit="saveCustomPin(event)">
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">New Secret PIN (4-8 digits)</label>
+          <input type="password" id="newSecretPin" class="form-field-input" placeholder="Enter new PIN" minlength="4" maxlength="8" autocomplete="off" required>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <label style="font-size: 0.8rem; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">Confirm New PIN</label>
+          <input type="password" id="confirmSecretPin" class="form-field-input" placeholder="Re-enter new PIN" minlength="4" maxlength="8" autocomplete="off" required>
+        </div>
+        <div id="pinChangeMsg" style="font-size: 0.82rem; margin-bottom: 14px; display: none;"></div>
+        <button type="submit" class="btn-yellow-pill" style="width: 100%; justify-content: center; padding: 12px; font-weight: 700;">
+          Save Encrypted PIN
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // CRYPTOGRAPHIC ONE-WAY HASH (SHA-256 with Salt)
+    // No plain-text passwords exist anywhere in source code or Inspect!
+    const PIN_SALT = "gcfs_admin_v2_secure_";
+    const AUTHORIZED_HASHES = [
+      "13c81b64bf8130c052c8de60240c7c573fcc96095c4188bf2e60b5dbb36533b9",
+      "a1997228eb2c3bc50ae8664fd8852f142e3aed5bbcaa03052e3d247ec873c61a",
+      "7923d7543c36f16c41f756d8c44466b75dc23b34f6fe250fc0f957b7cdb8a8d5"
+    ];
+
+    async function computePinHash(pin) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(PIN_SALT + pin);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function unlockAdmin(e) {
+      e.preventDefault();
+      const errorEl = document.getElementById('pinErrorMsg');
+      const inputEl = document.getElementById('adminPinInput');
+      const unlockBtn = document.getElementById('unlockBtn');
+
+      // Check lockout status
+      const lockUntil = parseInt(sessionStorage.getItem('gcfs_lock_until') || '0');
+      if (Date.now() < lockUntil) {
+        const remainingSec = Math.ceil((lockUntil - Date.now()) / 1000);
+        errorEl.style.display = 'block';
+        errorEl.innerText = `Too many failed attempts. Security lockout active for ${remainingSec}s.`;
+        return;
+      }
+
+      const entered = inputEl.value.trim();
+      if (!entered) return;
+
+      const inputHash = await computePinHash(entered);
+      const customHash = localStorage.getItem('gcfs_custom_pinhash');
+
+      const isAuthorized = AUTHORIZED_HASHES.includes(inputHash) || (customHash && customHash === inputHash);
+
+      if (isAuthorized) {
+        sessionStorage.setItem('gcfs_admin_auth', 'true');
+        sessionStorage.removeItem('gcfs_pin_fails');
+        sessionStorage.removeItem('gcfs_lock_until');
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('dashboardMain').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'inline-flex';
+        inputEl.value = '';
+        errorEl.style.display = 'none';
+        loadLeads();
+        initCloudSync();
+      } else {
+        let fails = parseInt(sessionStorage.getItem('gcfs_pin_fails') || '0') + 1;
+        sessionStorage.setItem('gcfs_pin_fails', fails.toString());
+        inputEl.value = '';
+        errorEl.style.display = 'block';
+
+        if (fails >= 5) {
+          const lockoutTime = Date.now() + 60000;
+          sessionStorage.setItem('gcfs_lock_until', lockoutTime.toString());
+          errorEl.innerText = "Too many incorrect attempts! Security lockout active for 60 seconds.";
+          unlockBtn.disabled = true;
+          setTimeout(() => {
+            unlockBtn.disabled = false;
+            sessionStorage.removeItem('gcfs_lock_until');
+            sessionStorage.removeItem('gcfs_pin_fails');
+            errorEl.style.display = 'none';
+          }, 60000);
+        } else {
+          errorEl.innerText = `Incorrect PIN (${5 - fails} attempts remaining). Access denied.`;
+        }
+      }
+    }
+
+    function lockAdmin() {
+      sessionStorage.removeItem('gcfs_admin_auth');
+      document.getElementById('dashboardMain').style.display = 'none';
+      document.getElementById('logoutBtn').style.display = 'none';
+      document.getElementById('lockScreen').style.display = 'flex';
+      document.getElementById('adminPinInput').value = '';
+    }
+
+    function openSecurityModal() {
+      document.getElementById('securityModal').style.display = 'flex';
+      document.getElementById('pinChangeMsg').style.display = 'none';
+    }
+
+    function closeSecurityModal() {
+      document.getElementById('securityModal').style.display = 'none';
+    }
+
+    async function saveCustomPin(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('newSecretPin').value.trim();
+      const p2 = document.getElementById('confirmSecretPin').value.trim();
+      const msg = document.getElementById('pinChangeMsg');
+      if (p1 !== p2) {
+        msg.style.display = 'block';
+        msg.style.color = '#EF4444';
+        msg.innerText = 'PINs do not match! Please check and re-enter.';
+        return;
+      }
+      const newHash = await computePinHash(p1);
+      localStorage.setItem('gcfs_custom_pinhash', newHash);
+      msg.style.display = 'block';
+      msg.style.color = '#10B981';
+      msg.innerText = '✅ New PIN encrypted and saved successfully!';
+      setTimeout(() => {
+        closeSecurityModal();
+        document.getElementById('newSecretPin').value = '';
+        document.getElementById('confirmSecretPin').value = '';
+      }, 1500);
+    }
+
+    // Auto-login if already authenticated in this session
+    window.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('gcfs_admin_auth') === 'true') {
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('dashboardMain').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'inline-flex';
+        loadLeads();
+        initCloudSync();
+      }
+    });
+
+    function getLeads() {
+      try {
+        return JSON.parse(localStorage.getItem('gcfs_customer_leads') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveLeads(leads) {
+      localStorage.setItem('gcfs_customer_leads', JSON.stringify(leads));
+    }
+
+    function openCloudConfigModal() {
+      const cfg = getAppwriteConfig();
+      document.getElementById('cfgEndpoint').value = cfg.endpoint;
+      document.getElementById('cfgProjectId').value = cfg.projectId;
+      document.getElementById('cfgDatabaseId').value = cfg.databaseId;
+      document.getElementById('cfgCollectionId').value = cfg.collectionId;
+      document.getElementById('cloudConfigModal').style.display = 'flex';
+    }
+
+    function closeCloudConfigModal() {
+      document.getElementById('cloudConfigModal').style.display = 'none';
+      document.getElementById('testResultMsg').style.display = 'none';
+    }
+
+    function saveCloudConfig() {
+      const dbId = document.getElementById('cfgDatabaseId').value.trim() || 'gcfs_database';
+      const colId = document.getElementById('cfgCollectionId').value.trim() || 'leads';
+      const cfg = {
+        endpoint: 'https://fra.cloud.appwrite.io/v1',
+        projectId: '6abcf17f003452017081',
+        databaseId: dbId,
+        collectionId: colId
+      };
+      localStorage.setItem('gcfs_appwrite_config', JSON.stringify(cfg));
+      initAppwrite();
+      initCloudSync();
+      closeCloudConfigModal();
+      alert('Appwrite settings saved! Syncing now...');
+    }
+
+    async function testAppwriteConnection() {
+      const msg = document.getElementById('testResultMsg');
+      msg.style.display = 'block';
+      msg.style.color = '#D97706';
+      msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testing Appwrite connection...';
+
+      const dbId = document.getElementById('cfgDatabaseId').value.trim() || 'gcfs_database';
+      const colId = document.getElementById('cfgCollectionId').value.trim() || 'leads';
+
+      if (!appwriteDatabases) {
+        msg.style.color = '#EF4444';
+        msg.innerText = 'Appwrite SDK not loaded. Check internet connection.';
+        return;
+      }
+
+      try {
+        const res = await appwriteDatabases.listDocuments(dbId, colId);
+        msg.style.color = '#10B981';
+        msg.innerHTML = `<i class="fa-solid fa-circle-check"></i> Connected successfully! Found ${res.total} lead(s) in collection '${colId}'.`;
+        updateSyncBadge(true, `Appwrite Cloud: Live (${res.total} Leads)`);
+      } catch (err) {
+        msg.style.color = '#EF4444';
+        msg.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Notice: ${err.message || 'Collection not created yet or permissions pending.'}`;
+        updateSyncBadge(false, 'Appwrite: Setup Pending');
+      }
+    }
+
+    function updateSyncBadge(isLive, label) {
+      const badge = document.getElementById('cloudSyncStatusBadge');
+      const dot = document.getElementById('cloudSyncDot');
+      const text = document.getElementById('cloudSyncText');
+      if (text) text.innerText = label;
+      if (dot && badge) {
+        if (isLive) {
+          dot.style.background = '#10B981';
+          badge.style.color = '#10B981';
+        } else {
+          dot.style.background = '#F59E0B';
+          badge.style.color = '#F59E0B';
+        }
+      }
+    }
+
+    async function initCloudSync() {
+      if (typeof appwriteDatabases !== 'undefined' && appwriteDatabases) {
+        try {
+          const res = await appwriteDatabases.listDocuments(
+            APPWRITE_CONFIG.databaseId,
+            APPWRITE_CONFIG.collectionId
+          );
+          if (res && res.documents) {
+            updateSyncBadge(true, `Appwrite Cloud: Live (${res.total} Leads)`);
+            if (res.documents.length > 0) {
+              const cloudLeads = res.documents.map((doc, idx) => ({
+                id: doc.$id || idx,
+                date: doc.date || doc.$createdAt,
+                name: doc.name,
+                phone: doc.phone,
+                loanType: doc.loanType,
+                amount: doc.amount,
+                location: doc.location || 'Boisar'
+              }));
+              saveLeads(cloudLeads);
+              updateMetrics(cloudLeads);
+              renderLeadsTable();
+            }
+          }
+
+          // Realtime Subscription (Customer submits -> Instant Admin Table update!)
+          if (appwriteClient) {
+            appwriteClient.subscribe(
+              `databases.${APPWRITE_CONFIG.databaseId}.collections.${APPWRITE_CONFIG.collectionId}.documents`,
+              response => {
+                console.log('Realtime event received from Appwrite Cloud:', response);
+                initCloudSync();
+              }
+            );
+          }
+        } catch (err) {
+          console.log('Appwrite Cloud listDocuments notice:', err.message || err);
+          updateSyncBadge(false, 'Appwrite: Setup Pending (Click)');
+        }
+      } else {
+        updateSyncBadge(false, 'Local Storage (Offline)');
+      }
+    }
+
+    function loadLeads() {
+      let leads = getLeads();
+      if (leads.length === 0) {
+        leads = [
+          {
+            id: 1,
+            date: new Date(Date.now() - 3600000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            name: "Ramesh Patil",
+            phone: "9823012345",
+            loanType: "Personal Loan",
+            amount: "150000",
+            location: "Boisar"
+          },
+          {
+            id: 2,
+            date: new Date(Date.now() - 10800000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            name: "Sunil Sharma",
+            phone: "9167890123",
+            loanType: "Business Loan",
+            amount: "500000",
+            location: "Tarapur MIDC"
+          }
+        ];
+        saveLeads(leads);
+      }
+
+      updateMetrics(leads);
+      renderLeadsTable();
+    }
+
+    function updateMetrics(leads) {
+      document.getElementById('metricTotal').innerText = leads.length;
+      document.getElementById('metricPersonal').innerText = leads.filter(l => l.loanType.includes('Personal')).length;
+      document.getElementById('metricBusiness').innerText = leads.filter(l => l.loanType.includes('Business')).length;
+      document.getElementById('metricInstant').innerText = leads.filter(l => l.loanType.includes('Instant')).length;
+    }
+
+    function renderLeadsTable() {
+      const leads = getLeads();
+      const search = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filter = document.getElementById('filterLoanType').value;
+      const tbody = document.getElementById('leadsTableBody');
+
+      tbody.innerHTML = '';
+
+      const filtered = leads.filter(l => {
+        const matchesSearch = l.name.toLowerCase().includes(search) || l.phone.includes(search);
+        const matchesFilter = filter === 'ALL' || l.loanType === filter;
+        return matchesSearch && matchesFilter;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 32px; color: #888;">No leads found. When customers apply on your website, they will appear here!</td></tr>`;
+        return;
+      }
+
+      filtered.forEach((lead, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td data-label="#">${index + 1}</td>
+          <td data-label="Date & Time"><span style="font-size: 0.8rem; color: #64748B;">${lead.date}</span></td>
+          <td data-label="Customer"><strong>${lead.name}</strong></td>
+          <td data-label="Phone"><a href="tel:${lead.phone}" style="color: #2563EB; font-weight: 600;">+91 ${lead.phone}</a></td>
+          <td data-label="Service"><span class="loan-badge">${lead.loanType}</span></td>
+          <td data-label="Amount"><strong>₹${Number(lead.amount || 0).toLocaleString('en-IN')}</strong></td>
+          <td data-label="Location">${lead.location || 'Boisar'}</td>
+          <td data-label="Actions">
+            <a href="tel:${lead.phone}" class="action-btn btn-call" title="Call Customer"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=91${lead.phone}&text=Hello+${encodeURIComponent(lead.name)},+thank+you+for+reaching+out+to+Grand+Capital+Financial+Boisar+for+${encodeURIComponent(lead.loanType)}." target="_blank" class="action-btn btn-wa" title="WhatsApp Customer"><i class="fa-brands fa-whatsapp"></i></a>
+            <button class="action-btn btn-del" onclick="deleteLead(${lead.id})" title="Delete"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteLead(id) {
+      if (!confirm("Are you sure you want to delete this lead?")) return;
+      let leads = getLeads().filter(l => l.id !== id);
+      saveLeads(leads);
+      updateMetrics(leads);
+      renderLeadsTable();
+    }
+
+    function clearAllLeads() {
+      if (!confirm("Are you sure you want to delete ALL leads?")) return;
+      saveLeads([]);
+      updateMetrics([]);
+      renderLeadsTable();
+    }
+
+    function exportToExcel() {
+      const leads = getLeads();
+      if (leads.length === 0) {
+        alert("No leads to export!");
+        return;
+      }
+
+      let csv = "ID,Date & Time,Customer Name,Phone,Loan Type,Amount (INR),Location\n";
+      leads.forEach(l => {
+        csv += `"${l.id}","${l.date}","${l.name}","${l.phone}","${l.loanType}","${l.amount}","${l.location}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Grand_Capital_Financial_Leads_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // REAL-TIME LIVE SYNC (Instant update across tabs, windows & devices)
+    try {
+      const syncChannel = new BroadcastChannel('gcfs_leads_channel');
+      syncChannel.onmessage = (event) => {
+        if (event.data && event.data.type === 'NEW_LEAD') {
+          const leads = getLeads();
+          updateMetrics(leads);
+          renderLeadsTable();
+        }
+      };
+    } catch (e) {
+      console.log('BroadcastChannel not supported:', e);
+    }
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'gcfs_customer_leads') {
+        const leads = getLeads();
+        updateMetrics(leads);
+        renderLeadsTable();
+      }
+    });
+  </script>
+</body>
+</html>
