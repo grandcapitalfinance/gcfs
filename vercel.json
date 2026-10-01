@@ -3,7 +3,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/portal-7890", "destination": "/portal-gcfs-7890.html" },
+    { "source": "/portal-gcfs-7890", "destination": "/portal-gcfs-7890.html" },
     { "source": "/about", "destination": "/about.html" },
     { "source": "/services", "destination": "/services.html" },
     { "source": "/loans", "destination": "/services.html" },
@@ -31,7 +33,7 @@
       ]
     },
     {
-      "source": "/admin(.*)",
+      "source": "/(portal|admin)(.*)",
       "headers": [
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
