@@ -59,6 +59,9 @@ async function saveLeadToCloud(leadData) {
       const ch = new BroadcastChannel('gcfs_leads_channel');
       ch.postMessage({ type: 'NEW_LEAD', lead: lead });
     } catch (e) {}
+    try {
+      window.dispatchEvent(new CustomEvent('gcfs_new_lead', { detail: lead }));
+    } catch (e) {}
   } catch (err) {
     console.error('LocalStorage error:', err);
   }

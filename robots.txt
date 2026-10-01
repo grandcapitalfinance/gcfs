@@ -52,8 +52,7 @@ User-agent: Bingbot
 Allow: /
 
 # Sitemaps & LLM Context File
-Sitemap: https://grandcapitalfinancial.vercel.app/sitemap.xml
-Sitemap: https://grandcapitalfinancial.netlify.app/sitemap.xml
+Sitemap: https://grandcapitalfinanceboisar.com/sitemap.xml
 # LLM Knowledge Protocol
 # See https://llmstxt.org/
-# llms-txt: https://grandcapitalfinancial.vercel.app/llms.txt
+# llms-txt: https://grandcapitalfinanceboisar.com/llms.txt

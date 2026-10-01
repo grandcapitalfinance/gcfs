@@ -6,7 +6,7 @@
 
   <!-- 1. Homepage (Main Hub & Financial Portal) -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/</loc>
+    <loc>https://grandcapitalfinanceboisar.com/</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,13 +14,13 @@
 
   <!-- 2. Loans Hub (Personal, Business, Home, LAP, Used Car, Instant) -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/loans</loc>
+    <loc>https://grandcapitalfinanceboisar.com/loans</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/services.html</loc>
+    <loc>https://grandcapitalfinanceboisar.com/services.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -28,7 +28,7 @@
 
   <!-- 3. Insurance Hub (Bajaj Life, HDFC Life & Health Insurance) -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/insurance</loc>
+    <loc>https://grandcapitalfinanceboisar.com/insurance</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -36,19 +36,19 @@
 
   <!-- 4. Contact Us (Boisar & Palghar Branch Office) -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/contact</loc>
+    <loc>https://grandcapitalfinanceboisar.com/contact</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/contact-us</loc>
+    <loc>https://grandcapitalfinanceboisar.com/contact-us</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/contact.html</loc>
+    <loc>https://grandcapitalfinanceboisar.com/contact.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
@@ -56,27 +56,27 @@
 
   <!-- 5. Loan Application Page -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/apply</loc>
+    <loc>https://grandcapitalfinanceboisar.com/apply</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/apply-loan.html</loc>
+    <loc>https://grandcapitalfinanceboisar.com/apply-loan.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
   </url>
 
   <!-- 6. EMI Calculator -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/calculator</loc>
+    <loc>https://grandcapitalfinanceboisar.com/calculator</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/calculator.html</loc>
+    <loc>https://grandcapitalfinanceboisar.com/calculator.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -84,13 +84,13 @@
 
   <!-- 7. About Us & Company Profile -->
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/about</loc>
+    <loc>https://grandcapitalfinanceboisar.com/about</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://grandcapitalfinancial.vercel.app/about.html</loc>
+    <loc>https://grandcapitalfinanceboisar.com/about.html</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -3,18 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apply for Loan | Grand Capital Financial</title>
-  <meta name="description" content="Apply for instant, personal, business, home, mortgage loans, and life insurance online at Grand Capital Financial. Instant approval with minimal documentation.">
+  <title>Apply for Loan in Boisar | Instant Approval | Grand Capital Financial</title>
+  <meta name="description" content="Apply for instant, personal, business, home, and mortgage loans online in Boisar & Tarapur MIDC with Grand Capital Financial. Lowest interest from 9.99% ROI.">
+  <link rel="canonical" href="https://grandcapitalfinanceboisar.com/apply-loan.html">
+  <meta name="geo.region" content="IN-MH">
+  <meta name="geo.placename" content="Boisar, Tarapur MIDC, Palghar, Maharashtra">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+  <script src="js/appwrite-client.js"></script>
   <script>
-    // Unified Interface: Keep user on the unified home page and open application modal
-    const urlParams = new URLSearchParams(window.location.search);
-    const loanType = urlParams.get('type') || 'Personal Loan';
-    window.location.replace("index.html?apply=" + encodeURIComponent(loanType));
+    // Pre-populate loan category from URL parameter if present
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const loanType = urlParams.get('type') || urlParams.get('apply');
+      if (loanType && document.getElementById('loanCategory')) {
+        const sel = document.getElementById('loanCategory');
+        for (let opt of sel.options) {
+          if (opt.value.toLowerCase() === loanType.toLowerCase()) {
+            sel.value = opt.value;
+            break;
+          }
+        }
+      }
+    });
   </script>
 </head>
 <body>
@@ -376,15 +394,30 @@
         return;
       }
 
-      // Save to Appwrite Cloud & Local Storage
+      // 1. Guaranteed Lead Payload
+      const leadPayload = {
+        id: Date.now(),
+        date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        name: name,
+        phone: cleanPhone,
+        loanType: loan,
+        amount: amount,
+        location: (city || 'Boisar') + (pincode ? ' (' + pincode + ')' : '')
+      };
+
+      // 2. Save to Appwrite Cloud & Local Storage & Broadcast Live
       if (typeof saveLeadToCloud === 'function') {
-        saveLeadToCloud({
-          name: name,
-          phone: cleanPhone,
-          loanType: loan,
-          amount: amount,
-          location: (city || 'Boisar') + (pincode ? ' (' + pincode + ')' : '')
-        });
+        saveLeadToCloud(leadPayload);
+      } else {
+        try {
+          const existing = JSON.parse(localStorage.getItem('gcfs_customer_leads') || '[]');
+          existing.unshift(leadPayload);
+          localStorage.setItem('gcfs_customer_leads', JSON.stringify(existing));
+          const ch = new BroadcastChannel('gcfs_leads_channel');
+          ch.postMessage({ type: 'NEW_LEAD', lead: leadPayload });
+        } catch (err) {
+          console.error('Lead storage fallback error:', err);
+        }
       }
 
       const message = `*Grand Capital Financial - New Loan Application*%0A%0A` +

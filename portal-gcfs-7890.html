@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Executive Portal | Grand Capital Financial Boisar</title>
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -432,6 +435,202 @@
         border-radius: 8px;
       }
     }
+
+    /* Live Sync Status & Indicators */
+    .sync-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sync-status-badge:hover {
+      background: #E2E8F0;
+      border-color: #94A3B8;
+    }
+    .sync-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .btn-sync {
+      background: #0F172A;
+      color: #FFFFFF;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease;
+    }
+    .btn-sync:hover {
+      background: #1E293B;
+    }
+    .new-lead-glow {
+      animation: highlightGlow 3s ease-out;
+      background-color: #ECFDF5 !important;
+    }
+    @keyframes highlightGlow {
+      0% { background-color: #A7F3D0; }
+      50% { background-color: #D1FAE5; }
+      100% { background-color: #FFFFFF; }
+    }
+    .live-pulse-badge {
+      display: inline-block;
+      background: #10B981;
+      color: #FFFFFF;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+      letter-spacing: 0.5px;
+      animation: pulseGreen 1.5s infinite;
+    }
+
+    /* Cloud Settings Modal */
+    .cloud-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .cloud-modal-card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+    .cloud-modal-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cloud-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #64748B;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .cloud-modal-close:hover {
+      color: #0F172A;
+    }
+    .cloud-modal-body {
+      padding: 20px 22px;
+      overflow-y: auto;
+    }
+    .cloud-form-group {
+      margin-bottom: 14px;
+    }
+    .cloud-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 6px;
+    }
+    .cloud-input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .cloud-input:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    .cloud-modal-footer {
+      padding: 14px 22px;
+      border-top: 1px solid #E2E8F0;
+      background: #F8FAFC;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-test-cloud {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-test-cloud:hover {
+      background: #DBEAFE;
+    }
+    .btn-cancel-cloud {
+      background: transparent;
+      border: 1px solid #CBD5E1;
+      color: #475569;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .btn-save-cloud {
+      background: #2563EB;
+      border: none;
+      color: #FFFFFF;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-save-cloud:hover {
+      background: #1D4ED8;
+    }
+    @keyframes toastSlideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes toastFadeOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -444,6 +643,14 @@
       <span class="admin-brand-badge">SECURE PORTAL</span>
     </div>
     <div style="display: flex; align-items: center; gap: 10px;">
+      <div id="syncBadge" class="sync-status-badge" onclick="openCloudConfigModal()" title="Live Realtime Sync Status (Click to configure Cloud)">
+        <span class="sync-indicator-dot" id="syncDot"></span>
+        <span id="syncStatusText">Live Sync: Active</span>
+      </div>
+      <button class="nav-website-btn" id="cloudConfigBtn" onclick="openCloudConfigModal()" title="Appwrite Cloud Configuration">
+        <i class="fa-solid fa-cloud"></i>
+        <span>Cloud Sync</span>
+      </button>
       <button class="nav-website-btn" id="logoutBtn" onclick="lockAdmin()" style="display: none;" title="Lock Admin Portal">
         <i class="fa-solid fa-lock"></i>
         <span>Lock</span>
@@ -534,6 +741,10 @@
       </div>
 
       <div class="toolbar-actions">
+        <button class="btn-sync" onclick="refreshLeadsManually()" title="Check & refresh leads immediately">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          <span>Check Leads</span>
+        </button>
         <button class="btn-export" onclick="exportToExcel()">
           <i class="fa-solid fa-file-excel"></i>
           <span>Download Excel</span>
@@ -566,6 +777,74 @@
     </div>
 
   </main>
+
+  <!-- Cloud & Realtime Sync Modal -->
+  <div class="cloud-modal-overlay" id="cloudConfigModal" style="display: none;">
+    <div class="cloud-modal-card">
+      <div class="cloud-modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="background: rgba(37,99,235,0.1); color: #2563EB; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #0F172A; margin: 0;">Cloud &amp; Realtime Sync Settings</h3>
+            <p style="font-size: 0.8rem; color: #64748B; margin: 2px 0 0 0;">Multi-device lead sync powered by Appwrite Cloud</p>
+          </div>
+        </div>
+        <button class="cloud-modal-close" onclick="closeCloudConfigModal()">&times;</button>
+      </div>
+
+      <div class="cloud-modal-body">
+        <div id="cloudStatusDetail" style="padding: 12px 16px; background: #F8FAFC; border-radius: 8px; border: 1px solid #E2E8F0; font-size: 0.85rem; margin-bottom: 16px;">
+          <span style="color: #64748B;">Checking cloud connection...</span>
+        </div>
+
+        <div class="cloud-form-group">
+          <label class="cloud-label">Appwrite Endpoint</label>
+          <input type="text" id="cfgEndpoint" class="cloud-input" value="https://fra.cloud.appwrite.io/v1" readonly style="background: #F1F5F9; color: #64748B;">
+        </div>
+
+        <div class="cloud-form-group">
+          <label class="cloud-label">Appwrite Project ID</label>
+          <input type="text" id="cfgProjectId" class="cloud-input" value="6abcf17f003452017081" placeholder="Enter Appwrite Project ID">
+        </div>
+
+        <div class="cloud-form-group">
+          <label class="cloud-label">Appwrite Database ID</label>
+          <input type="text" id="cfgDatabaseId" class="cloud-input" value="gcfs_database" placeholder="e.g. gcfs_database or custom ID">
+          <small style="color: #64748B; font-size: 0.75rem; display: block; margin-top: 4px;">If you created a database in Appwrite console with a custom or auto-generated ID, enter it here.</small>
+        </div>
+
+        <div class="cloud-form-group">
+          <label class="cloud-label">Appwrite Collection ID</label>
+          <input type="text" id="cfgCollectionId" class="cloud-input" value="leads" placeholder="e.g. leads">
+          <small style="color: #64748B; font-size: 0.75rem; display: block; margin-top: 4px;">Collection with attributes: name, phone, loanType, amount, location, date.</small>
+        </div>
+
+        <div id="cloudTestResult" style="display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem; margin-top: 10px;"></div>
+
+        <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 0.78rem; color: #1E3A8A;">
+          <strong>💡 How to verify or create in Appwrite Cloud:</strong>
+          <ol style="margin: 6px 0 0 16px; padding: 0; line-height: 1.6;">
+            <li>Go to <a href="https://cloud.appwrite.io" target="_blank" style="color: #2563EB; font-weight: 600;">cloud.appwrite.io</a> &bull; Project: <code>6abcf17f003452017081</code></li>
+            <li>Go to <strong>Databases</strong> &rarr; Click <strong>Create database</strong> &rarr; ID: <code>gcfs_database</code> (or copy existing ID here)</li>
+            <li>Go into the database &rarr; Click <strong>Create collection</strong> &rarr; ID: <code>leads</code></li>
+            <li>Under Collection <strong>Settings</strong> &rarr; <strong>Permissions</strong> &rarr; Add <code>Role: Any</code> &rarr; Check <strong>Create</strong> &amp; <strong>Read</strong> &rarr; Click Update!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="cloud-modal-footer">
+        <button type="button" class="btn-test-cloud" onclick="testAppwriteConnection()">
+          <i class="fa-solid fa-vial"></i> Test Connection
+        </button>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn-cancel-cloud" onclick="closeCloudConfigModal()">Cancel</button>
+          <button type="button" class="btn-save-cloud" onclick="saveCloudConfig()">Save &amp; Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ========================================================
@@ -675,6 +954,7 @@
         try {
           ACTIVE_PIN_SESSION = entered;
           sessionStorage.setItem('gcfs_admin_auth', 'true');
+          sessionStorage.setItem('gcfs_session_pin', entered);
           sessionStorage.removeItem('gcfs_pin_fails');
           sessionStorage.removeItem('gcfs_lock_until');
 
@@ -720,6 +1000,7 @@
       ACTIVE_DECRYPTED_LEADS = null;
       ACTIVE_PIN_SESSION = null;
       sessionStorage.removeItem('gcfs_admin_auth');
+      sessionStorage.removeItem('gcfs_session_pin');
       document.getElementById('dashboardMain').style.display = 'none';
       document.getElementById('logoutBtn').style.display = 'none';
       document.getElementById('lockScreen').style.display = 'flex';
@@ -736,44 +1017,63 @@
         try {
           leads = await decryptLeads(rawEncrypted, pin);
         } catch (e) {
+          console.error("Decryption error:", e);
           leads = [];
         }
       } else {
-        // Check legacy store and upgrade to AES-256
-        const legacy = localStorage.getItem('gcfs_customer_leads');
-        if (legacy) {
-          try {
-            leads = JSON.parse(legacy);
-          } catch(e) { leads = []; }
-          // Wipe plain-text legacy store immediately
-          localStorage.removeItem('gcfs_customer_leads');
-        } else {
-          // Default initial demonstration leads
-          leads = [
-            {
-              id: 1,
-              date: new Date(Date.now() - 3600000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-              name: "Ramesh Patil",
-              phone: "9823012345",
-              loanType: "Personal Loan",
-              amount: "150000",
-              location: "Boisar"
-            },
-            {
-              id: 2,
-              date: new Date(Date.now() - 10800000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-              name: "Sunil Sharma",
-              phone: "9167890123",
-              loanType: "Business Loan",
-              amount: "500000",
-              location: "Tarapur MIDC"
-            }
-          ];
-        }
-        // Save as encrypted AES-256
-        const encrypted = await encryptLeads(leads, pin);
-        localStorage.setItem('gcfs_encrypted_leads_v2', encrypted);
+        // Initial demonstration records
+        leads = [
+          {
+            id: 1,
+            date: new Date(Date.now() - 3600000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            name: "Ramesh Patil",
+            phone: "9823012345",
+            loanType: "Personal Loan",
+            amount: "150000",
+            location: "Boisar"
+          },
+          {
+            id: 2,
+            date: new Date(Date.now() - 10800000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            name: "Sunil Sharma",
+            phone: "9167890123",
+            loanType: "Business Loan",
+            amount: "500000",
+            location: "Tarapur MIDC"
+          }
+        ];
       }
+
+      // 2. ALWAYS absorb and merge any pending unencrypted leads submitted from customer forms (apply-loan, index modal, contact)
+      const pendingRaw = localStorage.getItem('gcfs_customer_leads');
+      if (pendingRaw) {
+        try {
+          const pendingLeads = JSON.parse(pendingRaw);
+          if (Array.isArray(pendingLeads) && pendingLeads.length > 0) {
+            let addedCount = 0;
+            for (const pl of pendingLeads) {
+              const exists = leads.some(l => 
+                (l.id && l.id === pl.id) || 
+                (l.phone === pl.phone && l.date === pl.date)
+              );
+              if (!exists) {
+                pl._isLive = true;
+                leads.unshift(pl);
+                addedCount++;
+              }
+            }
+            if (addedCount > 0) {
+              console.log(`Merged ${addedCount} pending customer lead(s) into encrypted vault.`);
+            }
+          }
+        } catch (e) {
+          console.error("Pending leads absorption error:", e);
+        }
+      }
+
+      // Save encrypted
+      const encrypted = await encryptLeads(leads, pin);
+      localStorage.setItem('gcfs_encrypted_leads_v2', encrypted);
 
       ACTIVE_DECRYPTED_LEADS = leads;
       updateMetrics(leads);
@@ -814,7 +1114,6 @@
       const tbody = document.getElementById('leadsTableBody');
       if (!tbody) return;
 
-      // Defense in depth: If hacker bypassed lockScreen in DOM without decrypting
       if (!ACTIVE_DECRYPTED_LEADS) {
         tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 36px; color: #EF4444; font-weight: 700;">🔒 Cryptographically Locked: Enter valid PIN to decrypt customer records.</td></tr>`;
         return;
@@ -847,8 +1146,12 @@
         const safeAmount = Number(lead.amount || 0).toLocaleString('en-IN');
 
         const tr = document.createElement('tr');
+        if (lead._isLive) {
+          tr.className = 'new-lead-glow';
+        }
+
         tr.innerHTML = `
-          <td data-label="#">${index + 1}</td>
+          <td data-label="#">${index + 1} ${lead._isLive ? '<span class="live-pulse-badge">NEW</span>' : ''}</td>
           <td data-label="Date & Time"><span style="font-size: 0.8rem; color: #64748B;">${safeDate}</span></td>
           <td data-label="Customer"><strong>${safeName}</strong></td>
           <td data-label="Phone"><a href="tel:${cleanPhone}" style="color: #2563EB; font-weight: 600;">+91 ${cleanPhone}</a></td>
@@ -863,6 +1166,98 @@
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    async function handleIncomingLead(newLead) {
+      if (!newLead || !newLead.name) return;
+      console.log('⚡ Realtime Lead Ingestion in Admin Portal:', newLead);
+
+      if (ACTIVE_DECRYPTED_LEADS && ACTIVE_PIN_SESSION) {
+        const exists = ACTIVE_DECRYPTED_LEADS.some(l => 
+          (l.id && l.id === newLead.id) || 
+          (l.phone === newLead.phone && l.date === newLead.date)
+        );
+        if (!exists) {
+          newLead._isLive = true;
+          ACTIVE_DECRYPTED_LEADS.unshift(newLead);
+          await saveEncryptedLeads(ACTIVE_DECRYPTED_LEADS);
+          updateMetrics(ACTIVE_DECRYPTED_LEADS);
+          renderLeadsTable();
+          showLiveToast(newLead);
+          playAlertSound();
+        }
+      } else {
+        // Admin locked - ensure stored in customer leads for next decrypt
+        try {
+          const raw = localStorage.getItem('gcfs_customer_leads') || '[]';
+          const list = JSON.parse(raw);
+          if (!list.some(l => (l.id && l.id === newLead.id) || (l.phone === newLead.phone && l.date === newLead.date))) {
+            list.unshift(newLead);
+            localStorage.setItem('gcfs_customer_leads', JSON.stringify(list));
+          }
+        } catch (e) {}
+      }
+    }
+
+    function playAlertSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.08); // A5
+        gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } catch (e) {}
+    }
+
+    function showLiveToast(lead) {
+      let toastContainer = document.getElementById('liveToastContainer');
+      if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'liveToastContainer';
+        toastContainer.style.cssText = 'position: fixed; top: 75px; right: 20px; z-index: 999999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;';
+        document.body.appendChild(toastContainer);
+      }
+
+      const toast = document.createElement('div');
+      toast.style.cssText = 'background: #0F172A; color: #FFFFFF; border-left: 4px solid #10B981; padding: 14px 18px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 12px; pointer-events: auto; animation: toastSlideIn 0.3s ease-out; font-size: 0.88rem;';
+      toast.innerHTML = `
+        <div style="background: rgba(16,185,129,0.2); color: #10B981; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div>
+          <div style="font-weight: 700; color: #10B981; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">⚡ Live Lead Received!</div>
+          <div style="font-weight: 600; color: #F8FAFC; margin-top: 2px;">${escapeHTML(lead.name)} &bull; ${escapeHTML(lead.loanType)}</div>
+          <div style="font-size: 0.78rem; color: #94A3B8;">₹${Number(lead.amount || 0).toLocaleString('en-IN')} &bull; +91 ${sanitizePhone(lead.phone)}</div>
+        </div>
+      `;
+
+      toastContainer.appendChild(toast);
+      setTimeout(() => {
+        toast.style.animation = 'toastFadeOut 0.3s forwards';
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+
+    async function refreshLeadsManually() {
+      if (ACTIVE_PIN_SESSION) {
+        await loadAndDecryptLeads(ACTIVE_PIN_SESSION);
+        await initCloudSync();
+        const btn = document.querySelector('.btn-sync');
+        if (btn) {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> <span>Updated!</span>';
+          setTimeout(() => { btn.innerHTML = original; }, 1500);
+        }
+      } else {
+        alert("Please unlock the portal with your PIN to view leads.");
+      }
     }
 
     async function deleteLead(id) {
@@ -900,41 +1295,201 @@
       document.body.removeChild(link);
     }
 
+    // Appwrite Cloud Configuration UI
+    function openCloudConfigModal() {
+      const cfg = getAppwriteConfig();
+      document.getElementById('cfgEndpoint').value = cfg.endpoint || 'https://fra.cloud.appwrite.io/v1';
+      document.getElementById('cfgProjectId').value = cfg.projectId || '6abcf17f003452017081';
+      document.getElementById('cfgDatabaseId').value = cfg.databaseId || 'gcfs_database';
+      document.getElementById('cfgCollectionId').value = cfg.collectionId || 'leads';
+      document.getElementById('cloudTestResult').style.display = 'none';
+      document.getElementById('cloudConfigModal').style.display = 'flex';
+    }
+
+    function closeCloudConfigModal() {
+      document.getElementById('cloudConfigModal').style.display = 'none';
+    }
+
+    function saveCloudConfig() {
+      const ep = document.getElementById('cfgEndpoint').value.trim() || 'https://fra.cloud.appwrite.io/v1';
+      const pid = document.getElementById('cfgProjectId').value.trim() || '6abcf17f003452017081';
+      const dbId = document.getElementById('cfgDatabaseId').value.trim() || 'gcfs_database';
+      const colId = document.getElementById('cfgCollectionId').value.trim() || 'leads';
+      const cfg = {
+        endpoint: ep,
+        projectId: pid,
+        databaseId: dbId,
+        collectionId: colId
+      };
+      localStorage.setItem('gcfs_appwrite_config', JSON.stringify(cfg));
+      APPWRITE_CONFIG = cfg;
+      initAppwrite();
+      initCloudSync();
+      closeCloudConfigModal();
+      alert('Cloud Sync configuration saved!');
+    }
+
+    async function testAppwriteConnection() {
+      const dbId = document.getElementById('cfgDatabaseId').value.trim();
+      const colId = document.getElementById('cfgCollectionId').value.trim();
+      const projId = document.getElementById('cfgProjectId').value.trim();
+      const endpoint = document.getElementById('cfgEndpoint').value.trim();
+      const resultEl = document.getElementById('cloudTestResult');
+      resultEl.style.display = 'block';
+      resultEl.style.background = '#EFF6FF';
+      resultEl.innerHTML = '<span style="color: #2563EB;"><i class="fa-solid fa-spinner fa-spin"></i> Testing connection to Appwrite Cloud...</span>';
+
+      try {
+        if (typeof Appwrite === 'undefined') {
+          throw new Error("Appwrite SDK is not loaded in browser.");
+        }
+        const testClient = new Appwrite.Client()
+          .setEndpoint(endpoint)
+          .setProject(projId);
+        const testDb = new Appwrite.Databases(testClient);
+        const res = await testDb.listDocuments(dbId, colId);
+        resultEl.style.background = '#ECFDF5';
+        resultEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Connected Successfully! Found ${res.total} documents in collection '${colId}'.</span>`;
+      } catch (e) {
+        resultEl.style.background = '#FEF2F2';
+        resultEl.innerHTML = `<span style="color: #EF4444; font-weight: 600;"><i class="fa-solid fa-circle-xmark"></i> Connection Notice:</span> <span style="color: #991B1B;">${e.message}</span><div style="margin-top: 6px; font-size: 0.75rem; color: #64748B;">Tip: Make sure database ID and collection ID match your Appwrite dashboard and permissions include Role: Any (Read/Create).</div>`;
+      }
+    }
+
     // Appwrite Cloud Realtime Sync
     async function initCloudSync() {
+      const syncDot = document.getElementById('syncDot');
+      const syncText = document.getElementById('syncStatusText');
+      const cloudStatusEl = document.getElementById('cloudStatusDetail');
+
       if (typeof appwriteDatabases !== 'undefined' && appwriteDatabases && typeof APPWRITE_CONFIG !== 'undefined') {
         try {
           const res = await appwriteDatabases.listDocuments(
             APPWRITE_CONFIG.databaseId,
             APPWRITE_CONFIG.collectionId
           );
-          if (res && res.documents && res.documents.length > 0 && ACTIVE_PIN_SESSION) {
-            const cloudLeads = res.documents.map((doc, idx) => ({
-              id: doc.$id || idx,
-              date: doc.date || doc.$createdAt,
-              name: doc.name,
-              phone: doc.phone,
-              loanType: doc.loanType,
-              amount: doc.amount,
-              location: doc.location || 'Boisar'
-            }));
-            await saveEncryptedLeads(cloudLeads);
-            updateMetrics(cloudLeads);
-            renderLeadsTable();
+          
+          if (syncDot) syncDot.style.background = '#10B981';
+          if (syncText) syncText.innerText = `Appwrite Cloud: Live (${res.total} leads)`;
+          if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Connected: Appwrite Cloud (${res.total} documents synced)</span>`;
+
+          if (res && res.documents && res.documents.length > 0 && ACTIVE_PIN_SESSION && ACTIVE_DECRYPTED_LEADS) {
+            let addedFromCloud = 0;
+            res.documents.forEach((doc, idx) => {
+              const cloudLead = {
+                id: doc.$id || idx,
+                date: doc.date || doc.$createdAt,
+                name: doc.name,
+                phone: doc.phone,
+                loanType: doc.loanType,
+                amount: doc.amount,
+                location: doc.location || 'Boisar'
+              };
+              const exists = ACTIVE_DECRYPTED_LEADS.some(l => 
+                (l.id && l.id === cloudLead.id) || 
+                (l.phone === cloudLead.phone && l.date === cloudLead.date)
+              );
+              if (!exists) {
+                ACTIVE_DECRYPTED_LEADS.unshift(cloudLead);
+                addedFromCloud++;
+              }
+            });
+
+            if (addedFromCloud > 0) {
+              await saveEncryptedLeads(ACTIVE_DECRYPTED_LEADS);
+              updateMetrics(ACTIVE_DECRYPTED_LEADS);
+              renderLeadsTable();
+            }
           }
 
           // Realtime Subscription
           if (appwriteClient) {
             appwriteClient.subscribe(
               `databases.${APPWRITE_CONFIG.databaseId}.collections.${APPWRITE_CONFIG.collectionId}.documents`,
-              () => { initCloudSync(); }
+              (response) => {
+                console.log('Appwrite Cloud Realtime Event:', response);
+                if (response.payload) {
+                  handleIncomingLead({
+                    id: response.payload.$id || Date.now(),
+                    date: response.payload.date || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+                    name: response.payload.name,
+                    phone: response.payload.phone,
+                    loanType: response.payload.loanType,
+                    amount: response.payload.amount,
+                    location: response.payload.location || 'Boisar'
+                  });
+                } else {
+                  initCloudSync();
+                }
+              }
             );
           }
         } catch (err) {
           console.log('Cloud sync status:', err.message || err);
+          if (syncDot) syncDot.style.background = '#F59E0B';
+          if (syncText) syncText.innerText = 'Local Live Sync: Active';
+          if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #D97706; font-weight: 500;"><i class="fa-solid fa-triangle-exclamation"></i> Notice: ${err.message || 'Database not found. Setup in Appwrite Cloud.'}</span>`;
         }
+      } else {
+        if (syncDot) syncDot.style.background = '#10B981';
+        if (syncText) syncText.innerText = 'Local Live Sync: Active';
+        if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Local Realtime Sync Active</span>`;
       }
     }
+
+    // ========================================================
+    // REALTIME LIVE SYNC LISTENERS
+    // ========================================================
+    // 1. BroadcastChannel (Instant millisecond sync between browser tabs)
+    try {
+      const syncChannel = new BroadcastChannel('gcfs_leads_channel');
+      syncChannel.onmessage = (event) => {
+        if (event.data && event.data.type === 'NEW_LEAD' && event.data.lead) {
+          handleIncomingLead(event.data.lead);
+        }
+      };
+    } catch (e) {
+      console.warn('BroadcastChannel not supported:', e);
+    }
+
+    // 2. Storage Event (Cross-tab/window fallback)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'gcfs_customer_leads' && e.newValue) {
+        try {
+          const incoming = JSON.parse(e.newValue);
+          if (Array.isArray(incoming) && incoming.length > 0) {
+            incoming.forEach(lead => handleIncomingLead(lead));
+          }
+        } catch (err) {}
+      }
+    });
+
+    // 3. Custom Event Listener (Same-context dispatch)
+    window.addEventListener('gcfs_new_lead', (e) => {
+      if (e.detail) {
+        handleIncomingLead(e.detail);
+      }
+    });
+
+    // 4. Auto-restore session if previously authenticated in this tab
+    window.addEventListener('DOMContentLoaded', async () => {
+      const savedSessionPin = sessionStorage.getItem('gcfs_session_pin');
+      if (savedSessionPin) {
+        try {
+          const inputHash = await computePinHash(savedSessionPin);
+          if (inputHash === AUTHORIZED_HASH) {
+            ACTIVE_PIN_SESSION = savedSessionPin;
+            await loadAndDecryptLeads(savedSessionPin);
+            document.getElementById('lockScreen').style.display = 'none';
+            document.getElementById('dashboardMain').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'inline-flex';
+            initCloudSync();
+          }
+        } catch (e) {
+          sessionStorage.removeItem('gcfs_session_pin');
+        }
+      }
+    });
   </script>
 </body>
 </html>

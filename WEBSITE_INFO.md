@@ -1,6 +1,6 @@
 # Grand Capital Financial — Website Information & Data
 
-> Extracted from [https://grandcapitalfinancial.netlify.app/](https://grandcapitalfinancial.netlify.app/)
+> Official Domain: [https://grandcapitalfinanceboisar.com/](https://grandcapitalfinanceboisar.com/)
 
 ---
 
