@@ -2,7 +2,7 @@
   "company": {
     "name": "Grand Capital Financial",
     "experienceYears": "15+",
-    "email": "grandcapital42@gmail.com",
+    "email": "grandcapitalfinance@yahoo.com",
     "phone": "9284841551",
     "whatsappUrl": "https://api.whatsapp.com/send?phone=9284841551",
     "address": "Shop No.A-10, 2nd Floor, Prashant Complex, Opp BARC Gate, Chitralaya, Boisar 401501",
@@ -44,9 +44,9 @@
       "description": "A home loan, or mortgage, helps individuals purchase property by borrowing funds from a lender. It usually features long-term repayment plans and fixed or variable interest rates. Borrowers must meet specific eligibility criteria and provide collateral, typically the home itself."
     },
     {
-      "id": "mudra-loan",
-      "title": "Mudra Loan",
-      "description": "A Mudra loan is a government-backed initiative in India aimed at supporting small businesses and entrepreneurs. Offered under the Pradhan Mantri Mudra Yojana (PMMY), it provides funding up to ₹10 lakh without collateral, helping micro-enterprises grow and enhance financial inclusion."
+      "id": "used-car-loan",
+      "title": "Used & New Car Loan",
+      "description": "Drive home your dream car with flexible financing up to 90% on-road valuation. Enjoy lowest EMI tenures up to 7 years with quick paperless verification."
     },
     {
       "id": "mortgage-loan",
@@ -54,23 +54,23 @@
       "description": "A mortgage loan is a secured loan where property is used as collateral. It enables individuals to buy real estate by borrowing from a lender, typically repaid over long terms with fixed or adjustable interest rates. Defaulting risks losing the property."
     },
     {
-      "id": "life-insurance",
-      "title": "Life Insurance",
-      "description": "Life insurance provides financial protection to beneficiaries upon the policyholder's death. In exchange for regular premium payments, it ensures a payout, helping cover expenses like debts, education, or living costs. It offers peace of mind and long-term security."
+      "id": "bajaj-life",
+      "title": "Bajaj Life Insurance",
+      "description": "Comprehensive term plans and wealth protection policies from Bajaj Life offering maximum family financial coverage and tax benefits under Section 80C."
+    },
+    {
+      "id": "hdfc-life",
+      "title": "HDFC Life Insurance",
+      "description": "Market-leading term protection, child education savings, and guaranteed return retirement solutions backed by HDFC Life's industry-leading claim settlement ratio."
     },
     {
       "id": "health-insurance",
       "title": "Health Insurance",
       "description": "Health insurance provides financial coverage for medical expenses, including hospitalization, surgeries, and treatments. It helps reduce out-of-pocket costs during health emergencies, ensuring access to quality care and protecting against rising healthcare costs, offering peace of mind and security."
-    },
-    {
-      "id": "sip",
-      "title": "SIP (Systematic Investment Plan)",
-      "description": "A Systematic Investment Plan (SIP) allows investors to regularly invest small, fixed amounts in mutual funds offered by banks. It helps build wealth over time by averaging market volatility and encouraging disciplined, long-term investing, ideal for achieving financial goals."
     }
   ],
   "loanCalculatorConfig": {
-    "defaultRate": 15,
+    "defaultRate": 9.99,
     "minAmount": 1000,
     "maxAmount": 1200000,
     "defaultAmount": 25000,
@@ -128,6 +128,7 @@
     "Punjab National Bank (PNB)",
     "ICICI Bank",
     "Kotak Mahindra Bank",
-    "Bajaj Finserv / LIC"
+    "Bajaj Life",
+    "HDFC Life"
   ]
 }

@@ -34,7 +34,7 @@
 
 - **Phone Number:** `+91 9284841551` / `9284841551`
 - **WhatsApp Contact:** `https://api.whatsapp.com/send?phone=9284841551`
-- **Support Email:** `grandcapital42@gmail.com`
+- **Support Email:** `grandcapitalfinance@yahoo.com`
 - **Office Address:**
   Shop No. A-10, 2nd Floor, Prashant Complex, Opp BARC Gate, Chitralaya, Boisar - 401501, Maharashtra, India.
   - [Google Maps Location](https://maps.app.goo.gl/2gMgvfeoT79YkV6CA)
@@ -61,23 +61,23 @@
 ### 4. Home Loan
 - **Description:** A home loan, or mortgage, helps individuals purchase property by borrowing funds from a lender. It usually features long-term repayment plans and fixed or variable interest rates. Borrowers must meet specific eligibility criteria and provide collateral, typically the home itself.
 
-### 5. Mudra Loan
-- **Description:** A Mudra loan is a government-backed initiative in India aimed at supporting small businesses and entrepreneurs. Offered under the Pradhan Mantri Mudra Yojana (PMMY), it provides funding up to ₹10 lakh without collateral, helping micro-enterprises grow and enhance financial inclusion.
+### 5. Used & New Car Loan
+- **Description:** Drive home your dream car with flexible financing up to 90% on-road valuation. Enjoy lowest EMI tenures up to 7 years with quick paperless verification.
 
 ### 6. Mortgage Loan
 - **Description:** A mortgage loan is a secured loan where property is used as collateral. It enables individuals to buy real estate by borrowing from a lender, typically repaid over long terms with fixed or adjustable interest rates. Defaulting risks losing the property.
 
-### 7. Life Insurance
-- **Description:** Life insurance provides financial protection to beneficiaries upon the policyholder's death. In exchange for regular premium payments, it ensures a payout, helping cover expenses like debts, education, or living costs. It offers peace of mind and long-term security.
+### 7. Bajaj Life Insurance
+- **Description:** Comprehensive term plans, child education funds, and savings policies offering high financial cover and Section 80C tax rebates.
 
-### 8. Health Insurance
+### 8. HDFC Life Insurance
+- **Description:** Industry-leading term protection and guaranteed return retirement plans with a 99.5% claim settlement ratio.
+
+### 9. Health Insurance
 - **Description:** Health insurance provides financial coverage for medical expenses, including hospitalization, surgeries, and treatments. It helps reduce out-of-pocket costs during health emergencies, ensuring access to quality care and protecting against rising healthcare costs, offering peace of mind and security.
 
-### 9. Systematic Investment Plan (SIP)
-- **Description:** A Systematic Investment Plan (SIP) allows investors to regularly invest small, fixed amounts in mutual funds offered by banks. It helps build wealth over time by averaging market volatility and encouraging disciplined, long-term investing, ideal for achieving financial goals.
-
 ### Additional Listed Loan Categories in Footer:
-- Bike Loan
+- Used & New Car Loan
 - Abroad Study Loan
 
 ---
@@ -105,7 +105,7 @@
 
 ## 7. Why Choose Us (Value Propositions)
 
-- **Lower Rates:** Enjoy lower interest rates for affordable and flexible loan repayments.
+- **Lower Rates:** Starting from 9.99% p.a. for affordable and flexible loan repayments.
 - **Quick and Easy:** Get fast, hassle-free loans with flexible terms and instant approval.
 - **Instant Business Growth**
 - **24/7 Quality Service**
@@ -116,13 +116,9 @@
 
 ## 8. Loan Calculator Parameters (from Homepage)
 
-- **Default Annual Interest Rate:** 15%
+- **Default Annual Interest Rate:** 9.99%
 - **Loan Amount Range:** ₹1,000 to ₹12,00,000 (Default selected: ₹25,000)
 - **Duration / Tenure Range:** 1 Month to 10 Years / 120 Months (Default selected: 6 Months)
-- **Sample Output Calculation:**
-  - Pay Monthly: ₹4,791
-  - Term of Use: 6 Months
-  - Total Pay Back Amount: ₹28,750
 
 ---
 
@@ -152,14 +148,15 @@
 - Punjab National Bank (PNB)
 - ICICI Bank
 - Kotak Mahindra Bank
-- Bajaj Finserv / LIC (Collaboration popover)
+- Bajaj Life
+- HDFC Life
 
 ---
 
 ## 12. Popover Promotion
 
-- **Partner/Product:** Bajaj LIC
-- **Content:** *"Bajaj LIC is a collaboration between Bajaj Finserv and Life Insurance Corporation, offering life insurance products and services in India."*
+- **Partner/Product:** Bajaj Life & HDFC Life
+- **Content:** *"Get complete family protection with top-rated life insurance solutions from Bajaj Life and HDFC Life."*
 - **Action:** Apply Now (redirects to WhatsApp: `https://api.whatsapp.com/send?phone=9284841551`)
 
 ---

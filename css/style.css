@@ -638,6 +638,27 @@ a {
   color: #E11D48 !important;
 }
 
+.icon-item-circle.icon-bajaj,
+.strip-item-icon.icon-bajaj {
+  background: #EFF6FF !important;
+  border-color: #BFDBFE !important;
+  color: #1D4ED8 !important;
+}
+
+.icon-item-circle.icon-hdfc,
+.strip-item-icon.icon-hdfc {
+  background: #FFF1F2 !important;
+  border-color: #FECDD3 !important;
+  color: #E11D48 !important;
+}
+
+.icon-item-circle.icon-car,
+.strip-item-icon.icon-car {
+  background: #F0FDF4 !important;
+  border-color: #BBF7D0 !important;
+  color: #16A34A !important;
+}
+
 .icon-item-circle.icon-health,
 .strip-item-icon.icon-health {
   background: #ECFDF5 !important;
@@ -1644,7 +1665,7 @@ a {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 2000;
+  z-index: 100005;
   display: none;
   align-items: center;
   justify-content: center;
@@ -2328,6 +2349,7 @@ a {
 .loan-product-icon.icon-business { color: #7C3AED; }
 .loan-product-icon.icon-mudra { color: #EA580C; }
 .loan-product-icon.icon-mortgage { color: #0D9488; }
+.loan-product-icon.icon-car { color: #16A34A; }
 
 .loan-product-name {
   font-size: 0.85rem;
@@ -3772,5 +3794,151 @@ body.drawer-open {
   }
   .shriram-photo-small {
     height: 120px;
+  }
+}
+
+/* ========================================================
+   LOCAL SEO & AI SEARCH KNOWLEDGE HUB / FAQ STYLES
+   Optimized for ChatGPT Search, Google Gemini & Local Ranking
+   ======================================================== */
+.faq-section {
+  padding: 56px 0 40px;
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0;
+}
+
+.faq-header-wrap {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 36px;
+}
+
+.faq-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFF8E1;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.faq-main-heading {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.faq-subtitle {
+  font-size: 0.95rem;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+.faq-accordion-grid {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.faq-item:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.faq-item.active {
+  border-color: var(--brand-yellow);
+  background: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(255, 184, 0, 0.12);
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #1E293B;
+  text-align: left;
+  cursor: pointer;
+  gap: 16px;
+  transition: color 0.2s ease;
+}
+
+.faq-item.active .faq-question-btn {
+  color: #0F172A;
+}
+
+.faq-icon-indicator {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #E2E8F0;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.82rem;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.faq-item.active .faq-icon-indicator {
+  transform: rotate(180deg);
+  background: var(--brand-yellow);
+  color: #111111;
+}
+
+.faq-answer-pane {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-answer-inner {
+  padding: 0 22px 20px;
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.faq-answer-inner strong {
+  color: #0F172A;
+}
+
+@media (max-width: 768px) {
+  .faq-main-heading {
+    font-size: 1.45rem;
+  }
+  .faq-question-btn {
+    padding: 15px 16px;
+    font-size: 0.94rem;
+  }
+  .faq-answer-inner {
+    padding: 0 16px 16px;
+    font-size: 0.88rem;
   }
 }

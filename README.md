@@ -5,7 +5,7 @@ Official web portal and customer leads management platform for **Grand Capital F
 ## 🚀 Features
 
 - **Shriram Finance Aesthetic Design**: Professional, clean UI with customized branding, high-conversion loan application workflows, and responsive layouts.
-- **Multi-Loan Offerings**: Personal Loans, Business Loans, Instant Loans, Home Loans, LAP, Used/New Car Loans, Mudra Loans, and Investment Planners (SIP).
+- **Multi-Loan & Insurance Offerings**: Personal Loans, Business Loans, Instant Cash Loans, Home Loans, LAP, Used & New Car Loans (starting @ 9.99% p.a.), Bajaj Life & HDFC Life Insurance.
 - **Instant EMI & Financial Calculators**: Interactive EMI sliders, amortization graphs, and loan comparison tools.
 - **Admin Leads Portal (`admin.html`)**:
   - Encrypted military-grade SHA-256 PIN authentication (no exposed credentials).
@@ -45,4 +45,4 @@ Official web portal and customer leads management platform for **Grand Capital F
 
 - **Address**: Shop No. A-10, 2nd Floor, Prashant Complex, Opp BARC Gate, Chitralaya, Boisar - 401501, Maharashtra, India.
 - **Phone / WhatsApp**: +91 9284841551
-- **Email**: info@grandcapital.in / grandcapital42@gmail.com
+- **Email**: grandcapitalfinance@yahoo.com

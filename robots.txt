@@ -1,0 +1,57 @@
+# Robots.txt for Grand Capital Financial Services (GCFS)
+# Optimized for Google, Bing, AI Search (ChatGPT Search, Google Gemini, Perplexity, Claude, Apple Intelligence)
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /*?*token=
+Disallow: /*?*key=
+
+# OpenAI ChatGPT Crawlers (Search & Model Grounding)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google Gemini & Google Search
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity AI Crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude Crawlers
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Apple Intelligence Crawler
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Bing / Copilot
+User-agent: Bingbot
+Allow: /
+
+# Sitemaps & LLM Context File
+Sitemap: https://grandcapitalfinancial.vercel.app/sitemap.xml
+Sitemap: https://grandcapitalfinancial.netlify.app/sitemap.xml
+# LLM Knowledge Protocol
+# See https://llmstxt.org/
+# llms-txt: https://grandcapitalfinancial.vercel.app/llms.txt

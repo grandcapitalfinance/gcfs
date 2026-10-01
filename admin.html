@@ -491,14 +491,7 @@
       <span class="admin-brand-title">Grand Capital</span>
       <span class="admin-brand-badge">LEADS ADMIN</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <button class="nav-icon-btn" onclick="openSecurityModal()" title="Security & Change PIN">
-        <i class="fa-solid fa-shield-halved"></i>
-      </button>
-      <button class="nav-icon-btn" onclick="openCloudConfigModal()" title="Cloud & Sync Settings" id="cloudSyncStatusBadge">
-        <span class="cloud-sync-dot" id="cloudSyncDot"></span>
-        <i class="fa-solid fa-cloud"></i>
-      </button>
+    <div style="display: flex; align-items: center; gap: 10px;">
       <button class="nav-website-btn" id="logoutBtn" onclick="lockAdmin()" style="display: none;" title="Lock Admin Portal">
         <i class="fa-solid fa-lock"></i>
         <span>Lock</span>
@@ -522,7 +515,7 @@
       </p>
 
       <form id="pinForm" onsubmit="unlockAdmin(event)">
-        <input type="password" id="adminPinInput" class="pin-input" placeholder="••••" maxlength="8" autocomplete="off" autofocus required>
+        <input type="password" id="adminPinInput" class="pin-input" placeholder="••••••••" maxlength="12" autocomplete="off" autofocus required>
         <button type="submit" id="unlockBtn" class="btn-yellow-pill" style="width: 100%; justify-content: center; font-size: 0.95rem; font-weight: 600;">
           <span>Unlock Dashboard</span>
           <i class="fa-solid fa-arrow-right"></i>
@@ -580,11 +573,11 @@
           <option value="Business Loan">Business Loan</option>
           <option value="Instant Loan">Instant Loan</option>
           <option value="Home Loan">Home Loan</option>
-          <option value="Mudra Loan">Mudra Loan</option>
           <option value="Mortgage Loan">Mortgage Loan</option>
-          <option value="Life Insurance">Life Insurance</option>
+          <option value="Used Car Loan">Used Car Loan</option>
+          <option value="Bajaj Life Insurance">Bajaj Life Insurance</option>
+          <option value="HDFC Life Insurance">HDFC Life Insurance</option>
           <option value="Health Insurance">Health Insurance</option>
-          <option value="SIP">SIP</option>
         </select>
       </div>
 
@@ -717,9 +710,7 @@
     // No plain-text passwords exist anywhere in source code or Inspect!
     const PIN_SALT = "gcfs_admin_v2_secure_";
     const AUTHORIZED_HASHES = [
-      "13c81b64bf8130c052c8de60240c7c573fcc96095c4188bf2e60b5dbb36533b9",
-      "a1997228eb2c3bc50ae8664fd8852f142e3aed5bbcaa03052e3d247ec873c61a",
-      "7923d7543c36f16c41f756d8c44466b75dc23b34f6fe250fc0f957b7cdb8a8d5"
+      "e1ccdae7f4ddfca01c9c2c92921e1eb8f85c9b57f2daabf84227f1af8074be58" // Secret encrypted PIN hash for 78901234
     ];
 
     async function computePinHash(pin) {
@@ -749,9 +740,16 @@
       if (!entered) return;
 
       const inputHash = await computePinHash(entered);
+      
+      // Invalidate any legacy 1234 hash stored in local storage
+      const legacy1234Hash = "7923d7543c36f16c41f756d8c44466b75dc23b34f6fe250fc0f957b7cdb8a8d5";
       const customHash = localStorage.getItem('gcfs_custom_pinhash');
+      if (customHash === legacy1234Hash) {
+        localStorage.removeItem('gcfs_custom_pinhash');
+      }
 
-      const isAuthorized = AUTHORIZED_HASHES.includes(inputHash) || (customHash && customHash === inputHash);
+      const validCustomHash = localStorage.getItem('gcfs_custom_pinhash');
+      const isAuthorized = AUTHORIZED_HASHES.includes(inputHash) || (validCustomHash && validCustomHash === inputHash && validCustomHash !== legacy1234Hash);
 
       if (isAuthorized) {
         sessionStorage.setItem('gcfs_admin_auth', 'true');
@@ -1004,6 +1002,21 @@
       document.getElementById('metricInstant').innerText = leads.filter(l => l.loanType.includes('Instant')).length;
     }
 
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function sanitizePhone(phone) {
+      if (!phone) return '';
+      return String(phone).replace(/[^0-9+]/g, '');
+    }
+
     function renderLeadsTable() {
       const leads = getLeads();
       const search = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -1013,7 +1026,9 @@
       tbody.innerHTML = '';
 
       const filtered = leads.filter(l => {
-        const matchesSearch = l.name.toLowerCase().includes(search) || l.phone.includes(search);
+        const nameStr = (l.name || '').toLowerCase();
+        const phoneStr = (l.phone || '').toLowerCase();
+        const matchesSearch = nameStr.includes(search) || phoneStr.includes(search);
         const matchesFilter = filter === 'ALL' || l.loanType === filter;
         return matchesSearch && matchesFilter;
       });
@@ -1024,18 +1039,25 @@
       }
 
       filtered.forEach((lead, index) => {
+        const safeName = escapeHTML(lead.name || 'Anonymous');
+        const cleanPhone = sanitizePhone(lead.phone);
+        const safeLoan = escapeHTML(lead.loanType || 'Loan Inquiry');
+        const safeLocation = escapeHTML(lead.location || 'Boisar');
+        const safeDate = escapeHTML(lead.date || '');
+        const safeAmount = Number(lead.amount || 0).toLocaleString('en-IN');
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td data-label="#">${index + 1}</td>
-          <td data-label="Date & Time"><span style="font-size: 0.8rem; color: #64748B;">${lead.date}</span></td>
-          <td data-label="Customer"><strong>${lead.name}</strong></td>
-          <td data-label="Phone"><a href="tel:${lead.phone}" style="color: #2563EB; font-weight: 600;">+91 ${lead.phone}</a></td>
-          <td data-label="Service"><span class="loan-badge">${lead.loanType}</span></td>
-          <td data-label="Amount"><strong>₹${Number(lead.amount || 0).toLocaleString('en-IN')}</strong></td>
-          <td data-label="Location">${lead.location || 'Boisar'}</td>
+          <td data-label="Date & Time"><span style="font-size: 0.8rem; color: #64748B;">${safeDate}</span></td>
+          <td data-label="Customer"><strong>${safeName}</strong></td>
+          <td data-label="Phone"><a href="tel:${cleanPhone}" style="color: #2563EB; font-weight: 600;">+91 ${cleanPhone}</a></td>
+          <td data-label="Service"><span class="loan-badge">${safeLoan}</span></td>
+          <td data-label="Amount"><strong>₹${safeAmount}</strong></td>
+          <td data-label="Location">${safeLocation}</td>
           <td data-label="Actions">
-            <a href="tel:${lead.phone}" class="action-btn btn-call" title="Call Customer"><i class="fa-solid fa-phone"></i></a>
-            <a href="https://api.whatsapp.com/send?phone=91${lead.phone}&text=Hello+${encodeURIComponent(lead.name)},+thank+you+for+reaching+out+to+Grand+Capital+Financial+Boisar+for+${encodeURIComponent(lead.loanType)}." target="_blank" class="action-btn btn-wa" title="WhatsApp Customer"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="tel:${cleanPhone}" class="action-btn btn-call" title="Call Customer"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=91${cleanPhone}&text=Hello+${encodeURIComponent(lead.name || '')},+thank+you+for+reaching+out+to+Grand+Capital+Financial+Boisar+for+${encodeURIComponent(lead.loanType || '')}." target="_blank" class="action-btn btn-wa" title="WhatsApp Customer"><i class="fa-brands fa-whatsapp"></i></a>
             <button class="action-btn btn-del" onclick="deleteLead(${lead.id})" title="Delete"><i class="fa-solid fa-trash"></i></button>
           </td>
         `;

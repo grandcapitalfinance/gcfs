@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apply for Loan | Grand Capital Financial</title>
-  <meta name="description" content="Apply for instant, personal, business, mudra, home, and mortgage loans online at Grand Capital Financial. Instant approval with minimal documentation.">
+  <meta name="description" content="Apply for instant, personal, business, home, mortgage loans, and life insurance online at Grand Capital Financial. Instant approval with minimal documentation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -115,6 +115,9 @@
         </div>
 
         <form id="fullLoanForm">
+          <!-- Anti-bot honeypot -->
+          <input type="text" id="applyLoanHoneypot" name="website_hp_check" style="display:none !important; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off">
+
           <!-- Step 1: Loan Type -->
           <div style="margin-bottom: 32px;">
             <h3 style="font-size: 1.2rem; color: var(--slate-900); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
@@ -130,12 +133,11 @@
                   <option value="Personal Loan" selected>Personal Loan</option>
                   <option value="Business Loan">Business Loan</option>
                   <option value="Home Loan">Home Loan</option>
-                  <option value="Mudra Loan">Mudra Loan</option>
                   <option value="Mortgage Loan">Mortgage Loan</option>
-                  <option value="Life Insurance">Life Insurance</option>
+                  <option value="Used Car Loan">Used Car Loan</option>
+                  <option value="Bajaj Life Insurance">Bajaj Life Insurance</option>
+                  <option value="HDFC Life Insurance">HDFC Life Insurance</option>
                   <option value="Health Insurance">Health Insurance</option>
-                  <option value="SIP">SIP (Investment Plan)</option>
-                  <option value="Bike Loan">Bike Loan</option>
                   <option value="Abroad Study Loan">Abroad Study Loan</option>
                 </select>
               </div>
@@ -262,7 +264,7 @@
           <div class="footer-social-row">
             <a href="tel:9284841551" class="footer-social-btn" title="Call Us"><i class="fa-solid fa-phone"></i></a>
             <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="footer-social-btn footer-wa-btn" title="WhatsApp Us"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:info@grandcapital.in" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            <a href="mailto:grandcapitalfinance@yahoo.com" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="footer-social-btn" title="Office Location in Boisar"><i class="fa-solid fa-location-dot"></i></a>
           </div>
         </div>
@@ -276,7 +278,7 @@
             <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
             <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
             <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Mudra Loan')"><i class="fa-solid fa-chevron-right"></i> Pradhan Mantri Mudra Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Instant Loan')"><i class="fa-solid fa-chevron-right"></i> Instant Cash Loan</a></li>
           </ul>
         </div>
 
@@ -288,7 +290,7 @@
             <li><a href="#about-us"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
             <li><a href="#loans-section"><i class="fa-solid fa-chevron-right"></i> All Financial Services</a></li>
             <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> EMI Calculator</a></li>
-            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> SIP Investment Planner</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Bajaj Life Insurance')"><i class="fa-solid fa-chevron-right"></i> Bajaj & HDFC Life Insurance</a></li>
             <li><a href="#contact-us"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
           </ul>
         </div>
@@ -349,22 +351,36 @@
   <script>
     document.getElementById('fullLoanForm')?.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // Bot spam check
+      const honeypot = document.getElementById('applyLoanHoneypot')?.value;
+      if (honeypot) {
+        console.warn('Bot blocked.');
+        return;
+      }
+
       const loan = document.getElementById('loanCategory').value;
       const amount = document.getElementById('reqAmount').value;
       const tenure = document.getElementById('reqTenure').value;
       const purpose = document.getElementById('purpose').value;
-      const name = document.getElementById('fullName').value;
-      const phone = document.getElementById('mobileNumber').value;
-      const email = document.getElementById('emailAddress').value;
+      const name = document.getElementById('fullName').value.trim();
+      const rawPhone = document.getElementById('mobileNumber').value.trim();
+      const email = document.getElementById('emailAddress').value.trim();
       const emp = document.getElementById('empType').value;
-      const city = document.getElementById('city').value;
-      const pincode = document.getElementById('pincode').value;
+      const city = document.getElementById('city').value.trim();
+      const pincode = document.getElementById('pincode').value.trim();
+
+      const cleanPhone = rawPhone.replace(/[^0-9]/g, '');
+      if (!name || cleanPhone.length < 10) {
+        alert('Please enter your full name and a valid 10-digit mobile number.');
+        return;
+      }
 
       // Save to Appwrite Cloud & Local Storage
       if (typeof saveLeadToCloud === 'function') {
         saveLeadToCloud({
           name: name,
-          phone: phone,
+          phone: cleanPhone,
           loanType: loan,
           amount: amount,
           location: (city || 'Boisar') + (pincode ? ' (' + pincode + ')' : '')
@@ -378,10 +394,10 @@
         `🎯 *Purpose:* ${encodeURIComponent(purpose)}%0A%0A` +
         `*Applicant Details:*%0A` +
         `👤 *Name:* ${encodeURIComponent(name)}%0A` +
-        `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+        `📞 *Phone:* ${encodeURIComponent(cleanPhone)}%0A` +
         `📧 *Email:* ${encodeURIComponent(email || 'N/A')}%0A` +
         `💼 *Employment:* ${encodeURIComponent(emp)}%0A` +
-        `📍 *Location:* ${encodeURIComponent(city)} (${encodeURIComponent(pincode)})`;
+        `📍 *Location:* ${encodeURIComponent(city || 'Boisar')} (${encodeURIComponent(pincode || '401501')})`;
 
       window.open(`https://api.whatsapp.com/send?phone=919284841551&text=${message}`, '_blank');
       alert('Thank you ' + name + '! Your application for ' + loan + ' has been submitted successfully.');

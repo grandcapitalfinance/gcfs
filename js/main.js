@@ -22,8 +22,7 @@ function initMobileDrawer() {
 
   if (!drawer || !overlay) return;
 
-  const openDrawer = (e) => {
-    if (e) e.preventDefault();
+  const openDrawer = () => {
     drawer.classList.add('open');
     overlay.classList.add('active');
     document.documentElement.classList.add('drawer-open');
@@ -31,8 +30,7 @@ function initMobileDrawer() {
     document.body.style.overflow = 'hidden';
   };
 
-  const closeDrawer = (e) => {
-    if (e) e.preventDefault();
+  const closeDrawer = () => {
     drawer.classList.remove('open');
     overlay.classList.remove('active');
     document.documentElement.classList.remove('drawer-open');
@@ -40,12 +38,23 @@ function initMobileDrawer() {
     document.body.style.overflow = '';
   };
 
+  window.closeMobileDrawer = closeDrawer;
+
   toggleBtns.forEach(btn => {
-    btn.addEventListener('click', openDrawer);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openDrawer();
+    });
   });
 
-  closeBtn?.addEventListener('click', closeDrawer);
-  overlay?.addEventListener('click', closeDrawer);
+  closeBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDrawer();
+  });
+  overlay?.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDrawer();
+  });
 
   // Prevent background touch scrolling through overlay on mobile
   overlay?.addEventListener('touchmove', (e) => {
@@ -53,7 +62,20 @@ function initMobileDrawer() {
   }, { passive: false });
 
   navLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      closeDrawer();
+
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
+        }
+      }
+    });
   });
 }
 
@@ -71,7 +93,7 @@ function initHeroCalculator() {
   const updateHeroCalc = () => {
     const P = parseFloat(amountSlider.value);
     const tenureMonths = parseInt(tenureSlider.value);
-    const annualRate = 15; // 15% p.a. standard
+    const annualRate = 9.99; // 9.99% p.a. standard ROI
     const r = (annualRate / 12) / 100;
 
     amountDisplay.textContent = '₹' + P.toLocaleString('en-IN');
@@ -116,7 +138,7 @@ function initMainCalculator() {
   const calculate = () => {
     const P = parseFloat(amountRange.value);
     const N = parseInt(tenureRange.value); // in months
-    const R = parseFloat(rateRange ? rateRange.value : 15); // in %
+    const R = parseFloat(rateRange ? rateRange.value : 9.99); // in % (ROI starting at 9.99%)
 
     const r = (R / 12) / 100;
     let emi = 0;
@@ -238,24 +260,43 @@ function initApplicationModal() {
     applyForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
+      // Bot honeypot spam check
+      const honeypot = document.getElementById('applyHoneypot')?.value;
+      if (honeypot) {
+        console.warn('Spam submission detected and blocked.');
+        return;
+      }
+
       const name = document.getElementById('applyName')?.value.trim();
-      const phone = document.getElementById('applyPhone')?.value.trim();
+      const rawPhone = document.getElementById('applyPhone')?.value.trim();
       const loanType = document.getElementById('modalLoanType')?.value;
       const amount = document.getElementById('applyAmount')?.value.trim();
-      const city = document.getElementById('applyCity')?.value.trim();
+      const city = document.getElementById('applyCity')?.value.trim() || 'Boisar';
 
-      if (!name || !phone) {
-        alert('Please enter your full name and phone number.');
+      const cleanPhone = rawPhone ? rawPhone.replace(/[^0-9]/g, '') : '';
+      if (!name || cleanPhone.length < 10) {
+        alert('Please enter a valid full name and 10-digit mobile number.');
         return;
+      }
+
+      // Save lead immediately to Local Storage & Appwrite Cloud for Admin
+      if (typeof saveLeadToCloud === 'function') {
+        saveLeadToCloud({
+          name: name,
+          phone: cleanPhone,
+          loanType: loanType,
+          amount: amount || 'Not Specified',
+          location: city
+        });
       }
 
       // Format WhatsApp message to 9284841551
       const message = `*Grand Capital Financial - Loan Application*%0A%0A` +
         `👤 *Name:* ${encodeURIComponent(name)}%0A` +
-        `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+        `📞 *Phone:* ${encodeURIComponent(cleanPhone)}%0A` +
         `💼 *Loan Type:* ${encodeURIComponent(loanType)}%0A` +
         `💰 *Requested Amount:* ₹${encodeURIComponent(amount || 'Not Specified')}%0A` +
-        `📍 *City/Location:* ${encodeURIComponent(city || 'Not Specified')}%0A%0A` +
+        `📍 *City/Location:* ${encodeURIComponent(city)}%0A%0A` +
         `_Sent via Grand Capital Financial Portal_`;
 
       const whatsappUrl = `https://api.whatsapp.com/send?phone=919284841551&text=${message}`;
@@ -267,7 +308,7 @@ function initApplicationModal() {
   }
 }
 
-// Promo Popover (Bajaj LIC collaboration notification)
+// Promo Popover (Bajaj Life & HDFC Life collaboration notification)
 function initPromoPopover() {
   const popover = document.getElementById('promoPopover');
   const closeBtn = document.getElementById('closePromoBtn');

@@ -152,7 +152,7 @@
               <div>
                 <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Support Email</h4>
                 <p style="font-size: 0.9rem; color: var(--slate-600); margin-bottom: 4px;">Official Correspondence:</p>
-                <a href="mailto:grandcapital42@gmail.com" style="font-size: 1.05rem; font-weight: 700; color: var(--primary);">grandcapital42@gmail.com</a>
+                <a href="mailto:grandcapitalfinance@yahoo.com" style="font-size: 1.05rem; font-weight: 700; color: var(--primary);">grandcapitalfinance@yahoo.com</a>
               </div>
             </div>
 
@@ -181,6 +181,9 @@
           </p>
 
           <form id="contactMessageForm">
+            <!-- Anti-bot honeypot -->
+            <input type="text" id="contactHoneypot" name="website_hp_check" style="display:none !important; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off">
+
             <div class="form-grid">
               <div class="form-group full-width">
                 <label class="form-label" for="contactName">Your Name *</label>
@@ -204,11 +207,11 @@
                   <option value="Instant Loan">Instant Loan</option>
                   <option value="Business Loan">Business Loan</option>
                   <option value="Home Loan">Home Loan</option>
-                  <option value="Mudra Loan">Mudra Loan</option>
                   <option value="Mortgage Loan">Mortgage Loan</option>
-                  <option value="Life Insurance">Life Insurance</option>
+                  <option value="Used Car Loan">Used Car Loan</option>
+                  <option value="Bajaj Life Insurance">Bajaj Life Insurance</option>
+                  <option value="HDFC Life Insurance">HDFC Life Insurance</option>
                   <option value="Health Insurance">Health Insurance</option>
-                  <option value="SIP Plan">SIP Plan</option>
                   <option value="Other Query">Other Query</option>
                 </select>
               </div>
@@ -247,7 +250,7 @@
           <div class="footer-social-row">
             <a href="tel:9284841551" class="footer-social-btn" title="Call Us"><i class="fa-solid fa-phone"></i></a>
             <a href="https://api.whatsapp.com/send?phone=919284841551" target="_blank" class="footer-social-btn footer-wa-btn" title="WhatsApp Us"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:info@grandcapital.in" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
+            <a href="mailto:grandcapitalfinance@yahoo.com" class="footer-social-btn" title="Email Us"><i class="fa-solid fa-envelope"></i></a>
             <a href="https://maps.app.goo.gl/2gMgvfeoT79YkV6CA" target="_blank" class="footer-social-btn" title="Office Location in Boisar"><i class="fa-solid fa-location-dot"></i></a>
           </div>
         </div>
@@ -261,7 +264,7 @@
             <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
             <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
             <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Mudra Loan')"><i class="fa-solid fa-chevron-right"></i> Pradhan Mantri Mudra Loan</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Instant Loan')"><i class="fa-solid fa-chevron-right"></i> Instant Cash Loan</a></li>
           </ul>
         </div>
 
@@ -273,7 +276,7 @@
             <li><a href="#about-us"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
             <li><a href="#loans-section"><i class="fa-solid fa-chevron-right"></i> All Financial Services</a></li>
             <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> EMI Calculator</a></li>
-            <li><a href="#calculator"><i class="fa-solid fa-chevron-right"></i> SIP Investment Planner</a></li>
+            <li><a href="javascript:void(0)" onclick="openLoanModal('Bajaj Life Insurance')"><i class="fa-solid fa-chevron-right"></i> Bajaj & HDFC Life Insurance</a></li>
             <li><a href="#contact-us"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
           </ul>
         </div>
@@ -334,17 +337,31 @@
   <script>
     document.getElementById('contactMessageForm')?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('contactName').value;
-      const phone = document.getElementById('contactPhone').value;
-      const email = document.getElementById('contactEmail').value;
+
+      // Bot spam protection
+      const honeypot = document.getElementById('contactHoneypot')?.value;
+      if (honeypot) {
+        console.warn('Bot blocked.');
+        return;
+      }
+
+      const name = document.getElementById('contactName').value.trim();
+      const rawPhone = document.getElementById('contactPhone').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
       const service = document.getElementById('contactSubject').value;
-      const msg = document.getElementById('contactMessage').value;
+      const msg = document.getElementById('contactMessage').value.trim();
+
+      const cleanPhone = rawPhone.replace(/[^0-9]/g, '');
+      if (!name || cleanPhone.length < 10) {
+        alert('Please enter your full name and a valid 10-digit mobile number.');
+        return;
+      }
 
       // Save to Appwrite Cloud & Local Storage
       if (typeof saveLeadToCloud === 'function') {
         saveLeadToCloud({
           name: name,
-          phone: phone,
+          phone: cleanPhone,
           loanType: service || 'General Inquiry',
           amount: 'Inquiry',
           location: 'Boisar Contact Form'
@@ -353,7 +370,7 @@
 
       const whatsappText = `*Grand Capital Financial - New Inquiry*%0A%0A` +
         `👤 *Name:* ${encodeURIComponent(name)}%0A` +
-        `📞 *Phone:* ${encodeURIComponent(phone)}%0A` +
+        `📞 *Phone:* ${encodeURIComponent(cleanPhone)}%0A` +
         `📧 *Email:* ${encodeURIComponent(email || 'N/A')}%0A` +
         `💼 *Service:* ${encodeURIComponent(service)}%0A` +
         `💬 *Message:* ${encodeURIComponent(msg || 'Requesting callback')}`;
