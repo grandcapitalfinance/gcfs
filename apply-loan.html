@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R8GN8C2L7Y"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R8GN8C2L7Y');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apply for Loan in Boisar | Instant Approval | Grand Capital Financial</title>
-  <meta name="description" content="Apply for instant, personal, business, home, and mortgage loans online in Boisar & Tarapur MIDC with Grand Capital Financial. Lowest interest from 9.99% ROI.">
-  <link rel="canonical" href="https://grandcapitalfinanceboisar.com/apply-loan.html">
+  <title>Grand Capital Finance | Apply Instant Loan in Boisar &amp; Palghar (24h Sanction)</title>
+  <meta name="description" content="Apply online for instant Personal, Business &amp; Home Loans with Grand Capital Finance Boisar. Lowest 9.99% ROI, zero advance fee, same-day approval. WhatsApp +91 9284841551.">
+  <meta name="keywords" content="grand capital finance, grand capital finance boisar, apply loan in boisar, loan application boisar, personal loan application palghar, business loan application tarapur midc, dsa boisar online apply, instant loan sanction boisar">
+  <link rel="canonical" href="https://www.grandcapitalfinanceboisar.com/apply-loan.html">
   <meta name="geo.region" content="IN-MH">
   <meta name="geo.placename" content="Boisar, Tarapur MIDC, Palghar, Maharashtra">
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="shortcut icon" href="images/favicon.png">
-  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -354,6 +368,8 @@
           <a href="#about-us">Terms & Conditions</a>
           <span class="sep">&bull;</span>
           <a href="#contact-us">Support</a>
+          <span class="sep">&bull;</span>
+          <a href="admin.html" style="color: #64748B; font-weight: 500;" title="Staff & Executive Login"><i class="fa-solid fa-lock" style="font-size: 0.75rem;"></i> Executive Portal</a>
         </div>
       </div>
     </div>
@@ -365,6 +381,7 @@
     </a>
   </div>
 
+  <script src="js/analytics-tracker.js"></script>
   <script src="js/main.js"></script>
   <script>
     document.getElementById('fullLoanForm')?.addEventListener('submit', (e) => {
@@ -433,7 +450,8 @@
         `📍 *Location:* ${encodeURIComponent(city || 'Boisar')} (${encodeURIComponent(pincode || '401501')})`;
 
       window.open(`https://api.whatsapp.com/send?phone=919284841551&text=${message}`, '_blank');
-      alert('Thank you ' + name + '! Your application for ' + loan + ' has been submitted successfully.');
+      document.getElementById('fullLoanForm')?.reset();
+      alert('Thank you ' + name + '! Your application for ' + loan + ' has been sent to our team via WhatsApp and recorded in our Admin System.');
     });
   </script>
 </body>

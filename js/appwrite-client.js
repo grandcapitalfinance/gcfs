@@ -37,24 +37,31 @@ function initAppwrite() {
 // Auto init
 initAppwrite();
 
-// Save Lead to Appwrite Cloud + Local Storage
 async function saveLeadToCloud(leadData) {
   const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
   const lead = {
-    id: Date.now(),
-    date: timestamp,
-    name: leadData.name || 'N/A',
-    phone: leadData.phone || 'N/A',
-    loanType: leadData.loanType || 'N/A',
+    id: leadData.id || Date.now(),
+    date: leadData.date || timestamp,
+    name: leadData.name || 'Website Customer',
+    phone: String(leadData.phone || '').replace(/[^0-9]/g, ''),
+    loanType: leadData.loanType || 'Personal Loan',
     amount: String(leadData.amount || 'Not Specified'),
-    location: leadData.location || 'Boisar, Palghar'
+    location: leadData.location || 'Boisar, Palghar',
+    email: leadData.email || '',
+    message: leadData.message || ''
   };
 
   // 1. Local Storage Cache (Immediate offline-first)
   try {
     const existing = JSON.parse(localStorage.getItem('gcfs_customer_leads') || '[]');
-    existing.unshift(lead);
-    localStorage.setItem('gcfs_customer_leads', JSON.stringify(existing));
+    const isDup = existing.some(l => 
+      (l.id && l.id === lead.id) || 
+      (l.phone === lead.phone && l.loanType === lead.loanType && Math.abs((new Date(l.date || 0)) - (new Date(lead.date || 0))) < 10000)
+    );
+    if (!isDup) {
+      existing.unshift(lead);
+      localStorage.setItem('gcfs_customer_leads', JSON.stringify(existing));
+    }
     try {
       const ch = new BroadcastChannel('gcfs_leads_channel');
       ch.postMessage({ type: 'NEW_LEAD', lead: lead });
@@ -62,6 +69,7 @@ async function saveLeadToCloud(leadData) {
     try {
       window.dispatchEvent(new CustomEvent('gcfs_new_lead', { detail: lead }));
     } catch (e) {}
+    console.log('✅ Lead recorded for Admin:', lead);
   } catch (err) {
     console.error('LocalStorage error:', err);
   }

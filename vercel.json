@@ -3,7 +3,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/admin", "destination": "/index.html" },
     { "source": "/portal-7890", "destination": "/portal-gcfs-7890.html" },
     { "source": "/portal-gcfs-7890", "destination": "/portal-gcfs-7890.html" },
     { "source": "/about", "destination": "/about.html" },
@@ -28,7 +27,7 @@
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(self)" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://fra.cloud.appwrite.io https://*.appwrite.io https://api.whatsapp.com;"
+          "value": "default-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://fra.cloud.appwrite.io https://*.appwrite.io https://api.whatsapp.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://freeipapi.com https://ipapi.co https://api.country.is;"
         }
       ]
     },

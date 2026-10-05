@@ -52,7 +52,7 @@ User-agent: Bingbot
 Allow: /
 
 # Sitemaps & LLM Context File
-Sitemap: https://grandcapitalfinanceboisar.com/sitemap.xml
+Sitemap: https://www.grandcapitalfinanceboisar.com/sitemap.xml
 # LLM Knowledge Protocol
 # See https://llmstxt.org/
-# llms-txt: https://grandcapitalfinanceboisar.com/llms.txt
+# llms-txt: https://www.grandcapitalfinanceboisar.com/llms.txt
