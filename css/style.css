@@ -3941,4 +3941,158 @@ body.drawer-open {
     padding: 0 16px 16px;
     font-size: 0.88rem;
   }
+}
+
+/* ==========================================================================
+   HERO SEO BANNER (Compact, Light Theme Matching Website)
+   ========================================================================== */
+.hero-seo-banner {
+  margin-bottom: 18px;
+}
+
+.hero-seo-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  padding: 18px 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  border-left: 4.5px solid var(--brand-yellow);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  position: relative;
+}
+
+.hero-seo-content {
+  flex: 1 1 540px;
+  min-width: 280px;
+}
+
+.hero-seo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFDF0;
+  border: 1px solid #FDE68A;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #B45309;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.hero-seo-badge i {
+  color: #D97706;
+}
+
+.hero-seo-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 6px;
+  color: #0F172A;
+  letter-spacing: -0.2px;
+}
+
+.hero-seo-desc {
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.hero-seo-desc strong {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.hero-seo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero-apply-btn {
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  padding: 8px 18px !important;
+}
+
+.hero-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #F8FAFC;
+  border: 1.5px solid #CBD5E1;
+  color: #1E293B;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.hero-phone-btn:hover {
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
+}
+
+.hero-seo-features {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #F8FAFC;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+  min-width: 220px;
+  flex: 0 0 auto;
+}
+
+.hero-features-title {
+  font-size: 0.72rem;
+  color: #64748B;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.hero-feature-item {
+  font-size: 0.8rem;
+  color: #1E293B;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 500;
+}
+
+.hero-feature-item i {
+  color: #10B981;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .hero-seo-card {
+    padding: 14px 16px;
+  }
+  .hero-seo-title {
+    font-size: 1.1rem;
+  }
+  .hero-seo-desc {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+  .hero-seo-features {
+    width: 100%;
+    min-width: unset;
+  }
 }
