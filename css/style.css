@@ -900,6 +900,128 @@ a {
 }
 
 /* ==========================================================================
+   BANKING & NBFC PARTNERS MARQUEE
+   ========================================================================== */
+.bank-partners-section {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 24px 22px;
+  background: var(--bg-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border-bottom: 3.5px solid var(--brand-yellow);
+  margin-bottom: 24px;
+}
+
+.bank-marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 6px 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+}
+
+.bank-marquee-container-mt {
+  margin-top: 10px;
+}
+
+.bank-marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: bankMarqueeScroll 50s linear infinite;
+  will-change: transform;
+}
+
+.bank-marquee-track-rev {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: bankMarqueeScrollRev 52s linear infinite;
+  will-change: transform;
+}
+
+.bank-marquee-container:hover .bank-marquee-track,
+.bank-marquee-container:hover .bank-marquee-track-rev {
+  animation-play-state: paused;
+}
+
+@keyframes bankMarqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bankMarqueeScrollRev {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.bank-marquee-card {
+  width: 168px;
+  height: 66px;
+  flex-shrink: 0;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 10px 18px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  user-select: none;
+}
+
+.bank-marquee-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: #EAB308;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.bank-logo-img {
+  max-width: 136px;
+  max-height: 44px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .bank-partners-section {
+    padding: 20px 16px;
+  }
+  .bank-marquee-card {
+    width: 136px;
+    height: 56px;
+    padding: 8px 12px;
+  }
+  .bank-logo-img {
+    max-width: 112px;
+    max-height: 36px;
+  }
+  .bank-marquee-track {
+    animation-duration: 38s;
+    gap: 12px;
+  }
+  .bank-marquee-track-rev {
+    animation-duration: 40s;
+    gap: 12px;
+  }
+}
+
+/* ==========================================================================
    "WE HAVE YOUR FINANCES COVERED" (Yellow Stripe Backdrop)
    ========================================================================== */
 .finances-covered-section {
