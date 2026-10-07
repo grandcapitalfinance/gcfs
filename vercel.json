@@ -2,6 +2,13 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/apply", "destination": "/apply-loan", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/loans", "destination": "/services", "permanent": true },
+    { "source": "/insurance", "destination": "/services", "permanent": true },
+    { "source": "/admin.html", "destination": "/portal-7890", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/portal-7890", "destination": "/portal-gcfs-7890.html" },
     { "source": "/portal-gcfs-7890", "destination": "/portal-gcfs-7890.html" },

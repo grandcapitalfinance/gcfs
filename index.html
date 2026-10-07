@@ -262,30 +262,37 @@
           {
             "@type": "SiteNavigationElement",
             "position": 1,
-            "name": "Apply Online for Instant Loan",
-            "description": "Apply online for personal, business, or home loans in Boisar & Palghar with same-day approval and ₹0 advance fees.",
-            "url": "https://www.grandcapitalfinanceboisar.com/apply-loan.html"
+            "name": "Loans & Financial Services",
+            "description": "Explore Personal Loans from 9.99% ROI, Tarapur MIDC Business Loans, Home Loans, and Life Insurance.",
+            "url": "https://www.grandcapitalfinanceboisar.com/services"
           },
           {
             "@type": "SiteNavigationElement",
             "position": 2,
-            "name": "Contact Us - Boisar Office",
-            "description": "Visit our branch opposite BARC Gate, Chitralaya, Boisar West or call / WhatsApp +91 9284841551.",
-            "url": "https://www.grandcapitalfinanceboisar.com/contact.html"
+            "name": "Apply Online for Instant Loan",
+            "description": "Apply online for personal, business, or home loans in Boisar & Palghar with same-day approval and ₹0 advance fees.",
+            "url": "https://www.grandcapitalfinanceboisar.com/apply-loan"
           },
           {
             "@type": "SiteNavigationElement",
             "position": 3,
-            "name": "Loans & Financial Services",
-            "description": "Explore Personal Loans from 9.99% ROI, Tarapur MIDC Business Loans, Home Loans, and Life Insurance.",
-            "url": "https://www.grandcapitalfinanceboisar.com/services.html"
+            "name": "Loan EMI Calculator",
+            "description": "Calculate your exact monthly EMI and compare interest rates across SBI, HDFC, ICICI, and Kotak Bank.",
+            "url": "https://www.grandcapitalfinanceboisar.com/calculator"
           },
           {
             "@type": "SiteNavigationElement",
             "position": 4,
-            "name": "Loan EMI Calculator",
-            "description": "Calculate your exact monthly EMI and compare interest rates across SBI, HDFC, ICICI, and Kotak Bank.",
-            "url": "https://www.grandcapitalfinanceboisar.com/calculator.html"
+            "name": "About Us & Company Profile",
+            "description": "Learn more about Grand Capital Financial Services, leading loan DSA in Boisar and Palghar with 15+ years of trust.",
+            "url": "https://www.grandcapitalfinanceboisar.com/about"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 5,
+            "name": "Contact Us - Boisar Office",
+            "description": "Visit our branch opposite BARC Gate, Chitralaya, Boisar West or call / WhatsApp +91 9284841551.",
+            "url": "https://www.grandcapitalfinanceboisar.com/contact"
           }
         ]
       }
@@ -323,7 +330,7 @@
           <span></span>
           <span></span>
         </button>
-        <a href="index.html" class="brand-emblem">
+        <a href="/" class="brand-emblem">
           <img src="header_logo_transparent.png" alt="Grand Capital Financial Services" class="brand-logo-img">
         </a>
       </div>
@@ -351,15 +358,15 @@
       <button class="drawer-close" id="drawerClose" aria-label="Close menu">&times;</button>
     </div>
     <div class="mobile-nav-links">
-      <a href="index.html" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
-      <a href="#about-us" class="mobile-nav-link"><i class="fa-solid fa-building"></i> About Us</a>
-      <a href="#loans-section" class="mobile-nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Loans &amp; Services</a>
-      <a href="#calculator" class="mobile-nav-link"><i class="fa-solid fa-calculator"></i> EMI Calculator</a>
-      <a href="javascript:void(0)" onclick="if(window.closeMobileDrawer) window.closeMobileDrawer(); openLoanModal('Personal Loan');" class="mobile-nav-link"><i class="fa-solid fa-file-signature"></i> Apply for Loan</a>
-      <a href="#contact-us" class="mobile-nav-link"><i class="fa-solid fa-phone"></i> Contact Us</a>
+      <a href="/" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="/about" class="mobile-nav-link"><i class="fa-solid fa-building"></i> About Us</a>
+      <a href="/services" class="mobile-nav-link"><i class="fa-solid fa-hand-holding-dollar"></i> Loans &amp; Services</a>
+      <a href="/calculator" class="mobile-nav-link"><i class="fa-solid fa-calculator"></i> EMI Calculator</a>
+      <a href="/apply-loan" class="mobile-nav-link"><i class="fa-solid fa-file-signature"></i> Apply for Loan</a>
+      <a href="/contact" class="mobile-nav-link"><i class="fa-solid fa-phone"></i> Contact Us</a>
     </div>
     <div class="mobile-drawer-footer">
-      <a href="javascript:void(0)" onclick="if(window.closeMobileDrawer) window.closeMobileDrawer(); openLoanModal('Personal Loan');" class="drawer-apply-btn">
+      <a href="/apply-loan" class="drawer-apply-btn">
         <i class="fa-solid fa-bolt"></i> Quick Loan Apply
       </a>
       <a href="tel:9284841551" class="drawer-contact-item">
@@ -384,7 +391,7 @@
           </button>
           <div class="subnav-dropdown-menu mega-menu">
             <!-- 1 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Instant Loan')" class="dropdown-link-item">
+            <a href="/services#instantloan" onclick="openLoanModal('Instant Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-bolt"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Instant Loan</span>
@@ -392,7 +399,7 @@
               </div>
             </a>
             <!-- 2 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Personal Loan')" class="dropdown-link-item">
+            <a href="/services#personalloan" onclick="openLoanModal('Personal Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-wallet"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Personal Loan</span>
@@ -400,7 +407,7 @@
               </div>
             </a>
             <!-- 3 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Business Loan')" class="dropdown-link-item">
+            <a href="/services#businessloan" onclick="openLoanModal('Business Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-store"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Business Loan</span>
@@ -408,7 +415,7 @@
               </div>
             </a>
             <!-- 4 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Home Loan')" class="dropdown-link-item">
+            <a href="/services#homeloan" onclick="openLoanModal('Home Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-house"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Home Loan</span>
@@ -416,7 +423,7 @@
               </div>
             </a>
             <!-- 5 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Mortgage Loan')" class="dropdown-link-item">
+            <a href="/services#mortgageloan" onclick="openLoanModal('Mortgage Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-landmark"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Mortgage Loan</span>
@@ -424,7 +431,7 @@
               </div>
             </a>
             <!-- 6 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')" class="dropdown-link-item">
+            <a href="/services#usedcarloan" onclick="openLoanModal('Used Car Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-car"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Used & New Car Loan</span>
@@ -432,7 +439,7 @@
               </div>
             </a>
             <!-- 7 -->
-            <a href="javascript:void(0)" onclick="openLoanModal('Abroad Study Loan')" class="dropdown-link-item">
+            <a href="/services" onclick="openLoanModal('Abroad Study Loan'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-graduation-cap"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Abroad Study Loan</span>
@@ -449,21 +456,21 @@
             <i class="fa-solid fa-chevron-down"></i>
           </button>
           <div class="subnav-dropdown-menu">
-            <a href="javascript:void(0)" onclick="openLoanModal('Bajaj Life Insurance')" class="dropdown-link-item">
+            <a href="/services#lifeinsurance" onclick="openLoanModal('Bajaj Life Insurance'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-shield-heart"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Bajaj Life Insurance</span>
                 <span class="dropdown-item-desc">Keep your family safe with Bajaj Life</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="openLoanModal('HDFC Life Insurance')" class="dropdown-link-item">
+            <a href="/services#lifeinsurance" onclick="openLoanModal('HDFC Life Insurance'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-heart-pulse"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">HDFC Life Insurance</span>
                 <span class="dropdown-item-desc">Term plans & savings with HDFC Life</span>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="openLoanModal('Health Insurance')" class="dropdown-link-item">
+            <a href="/services#healthinsurance" onclick="openLoanModal('Health Insurance'); event.preventDefault();" class="dropdown-link-item">
               <div class="dropdown-item-icon"><i class="fa-solid fa-hospital-user"></i></div>
               <div class="dropdown-item-content">
                 <span class="dropdown-item-title">Health Insurance</span>
@@ -511,36 +518,14 @@
           </div>
         </div>
 
-        <a href="services.html" class="subnav-item">All Services</a>
-        <a href="calculator.html" class="subnav-item">EMI Calculator</a>
-        <a href="about.html" class="subnav-item">About Us</a>
-        <a href="contact.html" class="subnav-item">Contact Us</a>
-        <a href="apply-loan.html" class="subnav-item" style="color: #F59E0B; font-weight: 700;"><i class="fa-solid fa-file-pen"></i> Apply Online</a>
+        <a href="/services" class="subnav-item">All Services</a>
+        <a href="/calculator" class="subnav-item">EMI Calculator</a>
+        <a href="/about" class="subnav-item">About Us</a>
+        <a href="/contact" class="subnav-item">Contact Us</a>
+        <a href="/apply-loan" class="subnav-item" style="color: #F59E0B; font-weight: 700;"><i class="fa-solid fa-file-pen"></i> Apply Online</a>
       </div>
     </div>
   </nav>
-
-    <!-- BREADCRUMBS NAVIGATION -->
-  <div class="site-breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumb-nav" itemscope itemtype="https://schema.org/BreadcrumbList">
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a itemprop="item" href="index.html"><span itemprop="name">Home</span></a>
-          <meta itemprop="position" content="1" />
-        </li>
-        <li class="separator">/</li>
-        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a itemprop="item" href="#loans-section"><span itemprop="name">Loans & Services</span></a>
-          <meta itemprop="position" content="2" />
-        </li>
-        <li class="separator">/</li>
-        <li class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <span itemprop="name">Boisar & Palghar Branch</span>
-          <meta itemprop="position" content="3" />
-        </li>
-      </ol>
-    </div>
-  </div>
 
   <!-- MAIN BODY -->
   <main class="main-content">
@@ -1379,7 +1364,7 @@
 
             <!-- Single Shriram-Style Yellow Button -->
             <div class="shriram-about-btn-wrap">
-              <a href="about.html" class="btn-shriram-about">About Us</a>
+              <a href="/about" class="btn-shriram-about">About Us</a>
             </div>
           </div>
 
@@ -2143,12 +2128,12 @@
         <div class="footer-col">
           <h4 class="footer-heading">Loan Products</h4>
           <ul class="footer-links-list">
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Personal Loan')"><i class="fa-solid fa-chevron-right"></i> Personal Loan</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Business Loan')"><i class="fa-solid fa-chevron-right"></i> Business Loan</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Home Loan')"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Loan Against Property')"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Used Car Loan')"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Instant Loan')"><i class="fa-solid fa-chevron-right"></i> Instant Cash Loan</a></li>
+            <li><a href="/services#personalloan" onclick="openLoanModal('Personal Loan'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Personal Loan</a></li>
+            <li><a href="/services#businessloan" onclick="openLoanModal('Business Loan'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Business Loan</a></li>
+            <li><a href="/services#homeloan" onclick="openLoanModal('Home Loan'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Home Loan & Balance Transfer</a></li>
+            <li><a href="/services#mortgageloan" onclick="openLoanModal('Loan Against Property'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Loan Against Property (LAP)</a></li>
+            <li><a href="/services#usedcarloan" onclick="openLoanModal('Used Car Loan'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Used & New Car Loan</a></li>
+            <li><a href="/services#instantloan" onclick="openLoanModal('Instant Loan'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Instant Cash Loan</a></li>
           </ul>
         </div>
 
@@ -2156,12 +2141,12 @@
         <div class="footer-col">
           <h4 class="footer-heading">Quick Links &amp; Tools</h4>
           <ul class="footer-links-list">
-            <li><a href="apply-loan.html" style="color: #F59E0B; font-weight: 700;"><i class="fa-solid fa-chevron-right"></i> Apply for Loan Online</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
-            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> All Loans &amp; Services</a></li>
-            <li><a href="calculator.html"><i class="fa-solid fa-chevron-right"></i> Loan EMI Calculator</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
-            <li><a href="javascript:void(0)" onclick="openLoanModal('Bajaj Life Insurance')"><i class="fa-solid fa-chevron-right"></i> Bajaj &amp; HDFC Life Insurance</a></li>
+            <li><a href="/apply-loan" style="color: #F59E0B; font-weight: 700;"><i class="fa-solid fa-chevron-right"></i> Apply for Loan Online</a></li>
+            <li><a href="/contact"><i class="fa-solid fa-chevron-right"></i> Contact Boisar Office</a></li>
+            <li><a href="/services"><i class="fa-solid fa-chevron-right"></i> All Loans &amp; Services</a></li>
+            <li><a href="/calculator"><i class="fa-solid fa-chevron-right"></i> Loan EMI Calculator</a></li>
+            <li><a href="/about"><i class="fa-solid fa-chevron-right"></i> About Our Company</a></li>
+            <li><a href="/services#lifeinsurance" onclick="openLoanModal('Bajaj Life Insurance'); event.preventDefault();"><i class="fa-solid fa-chevron-right"></i> Bajaj &amp; HDFC Life Insurance</a></li>
           </ul>
         </div>
 
@@ -2201,13 +2186,11 @@
           <span class="footer-disclaimer-text">Grand Capital Financial Services is an authorized loan facilitator and direct selling agent (DSA) for RBI-registered scheduled commercial banks and NBFCs. We do not charge upfront fees for loan processing.</span>
         </div>
         <div class="footer-bottom-links">
-          <a href="#about-us">Privacy Policy</a>
+          <a href="/about">Privacy Policy</a>
           <span class="sep">&bull;</span>
-          <a href="#about-us">Terms & Conditions</a>
+          <a href="/about">Terms & Conditions</a>
           <span class="sep">&bull;</span>
-          <a href="#contact-us">Support</a>
-          <span class="sep">&bull;</span>
-          <a href="admin.html" style="color: #64748B; font-weight: 500;" title="Staff & Executive Login"><i class="fa-solid fa-lock" style="font-size: 0.75rem;"></i> Executive Portal</a>
+          <a href="/contact">Support</a>
         </div>
       </div>
     </div>
@@ -2245,7 +2228,7 @@
   <!-- MOBILE BOTTOM NAVIGATION BAR -->
   <nav class="mobile-bottom-nav">
     <!-- 1. Home -->
-    <a href="index.html" class="bottom-nav-item active">
+    <a href="/" class="bottom-nav-item active">
       <div class="bottom-nav-icon">
         <i class="fa-solid fa-house"></i>
       </div>
