@@ -1456,10 +1456,14 @@
       <!-- Analytics Header Controls -->
       <div class="analytics-header-row" style="margin-bottom: 18px; padding: 14px 18px;">
         <div class="analytics-title-group">
-          <h2 style="font-size: 1.15rem; margin: 0;">
+          <h2 style="font-size: 1.15rem; margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
             <i class="fa-solid fa-chart-pie" style="color: #F59E0B;"></i>
             <span>Website Analytics</span>
             <span class="sync-indicator-dot" title="Live Real-time Active"></span>
+            <span id="cloudLiveSyncBadge" style="display: inline-flex; align-items: center; gap: 6px; background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; font-size: 0.72rem; padding: 3px 9px; border-radius: 999px; font-weight: 600;">
+              <span style="width: 7px; height: 7px; background: #10B981; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);"></span>
+              <span id="cloudLiveSyncText">Live All Devices Active</span>
+            </span>
           </h2>
         </div>
 
@@ -1481,7 +1485,7 @@
             </a>
 
             <!-- Quick Refresh -->
-            <button class="btn-analytics-action" onclick="refreshAnalyticsData()" title="Refresh Analytics Data">
+            <button class="btn-analytics-action" onclick="refreshAnalyticsData()" title="Refresh Analytics Data Live from Cloud">
               <i class="fa-solid fa-arrows-rotate"></i>
               <span>Refresh</span>
             </button>
@@ -1502,6 +1506,9 @@
           <div class="kpi-info">
             <h6>Total Visitors</h6>
             <div class="kpi-number" id="statUniqueVisitors">0</div>
+            <div style="font-size: 0.72rem; color: #2563EB; margin-top: 4px; font-weight: 500; display: flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-tower-broadcast" style="font-size: 0.65rem;"></i> Across all phones &amp; PCs
+            </div>
           </div>
           <div class="kpi-icon-bubble"><i class="fa-solid fa-users"></i></div>
         </div>
@@ -1511,6 +1518,9 @@
           <div class="kpi-info">
             <h6>Page Views</h6>
             <div class="kpi-number" id="statTotalViews">0</div>
+            <div style="font-size: 0.72rem; color: #10B981; margin-top: 4px; font-weight: 500; display: flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-bolt" style="font-size: 0.65rem;"></i> Total page visits
+            </div>
           </div>
           <div class="kpi-icon-bubble"><i class="fa-solid fa-eye"></i></div>
         </div>
@@ -1520,6 +1530,9 @@
           <div class="kpi-info">
             <h6>Clicks &amp; Actions</h6>
             <div class="kpi-number" id="statTotalClicks">0</div>
+            <div style="font-size: 0.72rem; color: #F59E0B; margin-top: 4px; font-weight: 500; display: flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-arrow-pointer" style="font-size: 0.65rem;"></i> WhatsApp, Calls &amp; Taps
+            </div>
           </div>
           <div class="kpi-icon-bubble"><i class="fa-solid fa-arrow-pointer"></i></div>
         </div>
@@ -1529,6 +1542,9 @@
           <div class="kpi-info">
             <h6>Customer Leads</h6>
             <div class="kpi-number" id="statTotalConversions">0</div>
+            <div style="font-size: 0.72rem; color: #8B5CF6; margin-top: 4px; font-weight: 500; display: flex; align-items: center; gap: 4px;">
+              <i class="fa-solid fa-user-check" style="font-size: 0.65rem;"></i> Applied applications
+            </div>
           </div>
           <div class="kpi-icon-bubble"><i class="fa-solid fa-user-check"></i></div>
         </div>
@@ -1852,6 +1868,7 @@
 
           // Cloud sync in memory
           initCloudSync();
+          syncGlobalCloudStats(false);
         } catch (err) {
           errorEl.style.display = 'block';
           errorEl.innerText = 'Cryptographic Decryption Error. Data tampered or corrupt.';
@@ -2337,10 +2354,80 @@
     });
 
     // ========================================================
-    // WEBSITE ANALYTICS & VISITOR INTELLIGENCE ENGINE
+    // WEBSITE ANALYTICS & VISITOR INTELLIGENCE ENGINE (CLOUD SYNC)
     // ========================================================
     let CURRENT_ANALYTICS_RANGE = 'week'; // 'today', 'week', 'month', 'all'
     let TRAFFIC_CHART_INSTANCE = null;
+    const CLOUD_COUNTER_GET = 'https://abacus.jasoncameron.dev/get/gcfs-grand-capital/';
+
+    let GLOBAL_CLOUD_STATS = {
+      visitors: 0,
+      views: 0,
+      clicks: 0,
+      devices: { mobile: 0, desktop: 0 },
+      lastSynced: null,
+      isFetching: false
+    };
+
+    async function fetchCloudMetric(key) {
+      try {
+        const res = await fetch(CLOUD_COUNTER_GET + key, { cache: 'no-cache' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.value === 'number') {
+            return data.value;
+          }
+        }
+      } catch (e) {}
+      return 0;
+    }
+
+    async function syncGlobalCloudStats(showNotification = false) {
+      if (GLOBAL_CLOUD_STATS.isFetching) return;
+      GLOBAL_CLOUD_STATS.isFetching = true;
+
+      const refreshBtn = document.querySelector('.btn-analytics-action i.fa-arrows-rotate');
+      if (refreshBtn) refreshBtn.classList.add('fa-spin');
+
+      try {
+        const [vis, views, clicks, devMobile, devDesktop] = await Promise.all([
+          fetchCloudMetric('total_visitors'),
+          fetchCloudMetric('total_views'),
+          fetchCloudMetric('total_clicks'),
+          fetchCloudMetric('device_mobile'),
+          fetchCloudMetric('device_desktop')
+        ]);
+
+        if (vis > 0) GLOBAL_CLOUD_STATS.visitors = vis;
+        if (views > 0) GLOBAL_CLOUD_STATS.views = views;
+        if (clicks > 0) GLOBAL_CLOUD_STATS.clicks = clicks;
+        if (devMobile > 0) GLOBAL_CLOUD_STATS.devices.mobile = devMobile;
+        if (devDesktop > 0) GLOBAL_CLOUD_STATS.devices.desktop = devDesktop;
+        GLOBAL_CLOUD_STATS.lastSynced = new Date();
+
+        const badge = document.getElementById('cloudLiveSyncBadge');
+        if (badge) {
+          badge.style.display = 'inline-flex';
+          const txt = document.getElementById('cloudLiveSyncText');
+          if (txt) {
+            const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            txt.innerText = `All Phones Live (${timeStr})`;
+          }
+        }
+
+        renderAnalyticsDashboard();
+
+        if (showNotification) {
+          const count = Math.max(GLOBAL_CLOUD_STATS.visitors, 1);
+          showToast(`Live Cloud Synced! Total Visitors across all devices: ${count}`);
+        }
+      } catch (err) {
+        console.warn('Sync cloud stats note:', err);
+      } finally {
+        GLOBAL_CLOUD_STATS.isFetching = false;
+        if (refreshBtn) refreshBtn.classList.remove('fa-spin');
+      }
+    }
 
     function switchAdminTab(tab) {
       const btnLeads = document.getElementById('tabBtnLeads');
@@ -2359,6 +2446,7 @@
         secLeads.style.display = 'none';
         secAnalytics.style.display = 'block';
         renderAnalyticsDashboard();
+        syncGlobalCloudStats(false);
       }
     }
 
@@ -2382,8 +2470,7 @@
     }
 
     function refreshAnalyticsData() {
-      renderAnalyticsDashboard();
-      showToast('Website Analytics Refreshed Live!');
+      syncGlobalCloudStats(true);
     }
 
     function getAnalyticsData() {
@@ -2470,23 +2557,40 @@
         totalEvents = store.totalEvents || 0;
       }
 
+      // Merge Cloud Live Numbers with Local Storage
+      const cloudVisitors = GLOBAL_CLOUD_STATS.visitors || 0;
+      const cloudViews = GLOBAL_CLOUD_STATS.views || 0;
+      const cloudClicks = GLOBAL_CLOUD_STATS.clicks || 0;
+
+      const finalUniqueVisitors = Math.max(uniqueCount, cloudVisitors);
+      const finalTotalViews = Math.max(totalViews, cloudViews);
+      const finalTotalClicks = Math.max(totalEvents, cloudClicks);
+
       // Real Leads count from active decrypted leads
       const totalLeads = (ACTIVE_DECRYPTED_LEADS && Array.isArray(ACTIVE_DECRYPTED_LEADS)) ? ACTIVE_DECRYPTED_LEADS.length : 0;
-      const convRate = uniqueCount > 0 ? ((totalLeads / uniqueCount) * 100).toFixed(1) : '0.0';
-      const avgViewsPerUser = uniqueCount > 0 ? (totalViews / uniqueCount).toFixed(1) : '0.0';
+      const convRate = finalUniqueVisitors > 0 ? ((totalLeads / finalUniqueVisitors) * 100).toFixed(1) : '0.0';
+      const avgViewsPerUser = finalUniqueVisitors > 0 ? (finalTotalViews / finalUniqueVisitors).toFixed(1) : '0.0';
 
       // 1. Update KPI Cards with 100% Real values
       const elVisitors = document.getElementById('statUniqueVisitors');
-      if (elVisitors) elVisitors.innerText = uniqueCount.toLocaleString();
+      if (elVisitors) elVisitors.innerText = finalUniqueVisitors.toLocaleString();
 
       const elViews = document.getElementById('statTotalViews');
-      if (elViews) elViews.innerText = totalViews.toLocaleString();
+      if (elViews) elViews.innerText = finalTotalViews.toLocaleString();
 
       const elClicks = document.getElementById('statTotalClicks');
-      if (elClicks) elClicks.innerText = totalEvents.toLocaleString();
+      if (elClicks) elClicks.innerText = finalTotalClicks.toLocaleString();
 
       const elConv = document.getElementById('statTotalConversions');
       if (elConv) elConv.innerText = totalLeads.toLocaleString();
+
+      // Sync chart views & events
+      if (finalTotalViews > totalViews && viewCounts.length > 0) {
+        viewCounts[viewCounts.length - 1] += (finalTotalViews - totalViews);
+      }
+      if (finalTotalClicks > totalEvents && eventCounts.length > 0) {
+        eventCounts[eventCounts.length - 1] += (finalTotalClicks - totalEvents);
+      }
 
       // 2. Render Traffic Trend Chart (Chart.js)
       renderTrafficChart(days, viewCounts, eventCounts);
@@ -2500,8 +2604,15 @@
       // 5. Render Clicks & User Interactions Breakdown
       renderClickEvents(store.eventsByType || {});
 
-      // 6. Render Devices & Browsers
-      renderDevices(store.devices || {}, store.browsers || {});
+      // 6. Render Devices & Browsers (merged with cloud)
+      const mergedDevices = { ...(store.devices || {}) };
+      if (GLOBAL_CLOUD_STATS.devices.mobile > 0) {
+        mergedDevices['Mobile'] = Math.max(mergedDevices['Mobile'] || 0, GLOBAL_CLOUD_STATS.devices.mobile);
+      }
+      if (GLOBAL_CLOUD_STATS.devices.desktop > 0) {
+        mergedDevices['Desktop'] = Math.max(mergedDevices['Desktop'] || 0, GLOBAL_CLOUD_STATS.devices.desktop);
+      }
+      renderDevices(mergedDevices, store.browsers || {});
 
       // 7. Render Locations
       renderLocations(store.locations || {});
@@ -2866,12 +2977,21 @@
             document.getElementById('dashboardMain').style.display = 'block';
             document.getElementById('logoutBtn').style.display = 'inline-flex';
             initCloudSync();
+            syncGlobalCloudStats(false);
           }
         } catch (e) {
           sessionStorage.removeItem('gcfs_session_pin');
         }
       }
     });
+
+    // Realtime Auto-Sync: Refresh cloud counts every 10 seconds when Analytics tab is visible
+    setInterval(() => {
+      const secAnalytics = document.getElementById('analyticsTabSection');
+      if (secAnalytics && secAnalytics.style.display !== 'none' && !document.hidden) {
+        syncGlobalCloudStats(false);
+      }
+    }, 10000);
   </script>
 </body>
 </html>

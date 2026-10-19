@@ -269,6 +269,9 @@
     store.recentActivity.unshift(entry);
     saveAnalyticsStore(store);
 
+    // Realtime Global Cloud Counter Sync (Clicks & Interactions)
+    syncGlobalClickHit();
+
     // Optional Appwrite Cloud Sync for events
     syncWithCloud('event', entry);
 
@@ -336,11 +339,73 @@
     store.recentActivity.unshift(entry);
     saveAnalyticsStore(store);
 
+    // Realtime Global Cloud Counter Sync (cross-device & live)
+    syncGlobalVisitorHit(pagePath, device, source);
+
     // Optional Appwrite Cloud Sync for views
     syncWithCloud('pageview', entry);
   };
 
-  // --- 9. APPWRITE CLOUD SYNC (OPTIONAL/BACKGROUND) ---
+  // --- 9. REALTIME GLOBAL CLOUD COUNTER ENGINE ---
+  const CLOUD_COUNTER_BASE = 'https://abacus.jasoncameron.dev/hit/gcfs-grand-capital/';
+
+  function pingCloudCounter(metricKey) {
+    if (!metricKey) return;
+    try {
+      const sanitized = metricKey.toLowerCase().replace(/[^a-z0-9_]/g, '_').substring(0, 40);
+      const url = CLOUD_COUNTER_BASE + sanitized;
+      if (typeof fetch !== 'undefined') {
+        fetch(url, { method: 'GET', mode: 'cors', keepalive: true }).catch(function () {});
+      } else {
+        new Image().src = url;
+      }
+    } catch (e) {}
+  }
+
+  function syncGlobalVisitorHit(pagePath, device, source) {
+    try {
+      // 1. Total Unique Visitors (Track once per unique browser/device)
+      const isSyncedVisitor = localStorage.getItem('gcfs_cloud_visitor_registered');
+      if (!isSyncedVisitor) {
+        localStorage.setItem('gcfs_cloud_visitor_registered', 'true');
+        pingCloudCounter('total_visitors');
+      }
+
+      // 2. Total Page Views (Every single page load across all phones/devices)
+      pingCloudCounter('total_views');
+
+      // 3. Device category
+      if (device && device.device) {
+        pingCloudCounter('device_' + device.device.toLowerCase());
+      }
+
+      // 4. Page category
+      let pageKey = 'page_home';
+      const p = (pagePath || '').toLowerCase();
+      if (p.includes('apply')) pageKey = 'page_apply';
+      else if (p.includes('calc')) pageKey = 'page_calculator';
+      else if (p.includes('contact')) pageKey = 'page_contact';
+      else if (p.includes('service') || p.includes('loan') || p.includes('insurance')) pageKey = 'page_services';
+      else if (p.includes('about')) pageKey = 'page_about';
+      pingCloudCounter(pageKey);
+
+      // 5. Source category
+      if (source) {
+        let srcKey = 'source_direct';
+        const s = source.toLowerCase();
+        if (s.includes('google')) srcKey = 'source_google';
+        else if (s.includes('whatsapp')) srcKey = 'source_whatsapp';
+        else if (s.includes('facebook') || s.includes('instagram') || s.includes('social')) srcKey = 'source_social';
+        pingCloudCounter(srcKey);
+      }
+    } catch (err) {}
+  }
+
+  function syncGlobalClickHit() {
+    pingCloudCounter('total_clicks');
+  }
+
+  // --- 10. APPWRITE CLOUD SYNC (OPTIONAL/BACKGROUND) ---
   function syncWithCloud(type, payload) {
     if (typeof appwriteDatabases !== 'undefined' && appwriteDatabases && typeof APPWRITE_CONFIG !== 'undefined') {
       try {
