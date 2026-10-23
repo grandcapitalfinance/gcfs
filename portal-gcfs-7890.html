@@ -1958,6 +1958,7 @@
       ACTIVE_DECRYPTED_LEADS = leads;
       updateMetrics(leads);
       renderLeadsTable();
+      syncGoogleSheetLeads();
     }
 
     async function saveEncryptedLeads(leads) {
@@ -2238,12 +2239,112 @@
       }
     }
 
-    // Appwrite Cloud Realtime Sync
-    async function initCloudSync() {
+    // ========================================================
+    // HYBRID CLOUD LEAD SYNC (Google Sheets Cloud + Appwrite)
+    // ========================================================
+    async function syncGoogleSheetLeads(isBackground = false) {
       const syncDot = document.getElementById('syncDot');
       const syncText = document.getElementById('syncStatusText');
       const cloudStatusEl = document.getElementById('cloudStatusDetail');
 
+      if (typeof fetchLeadsFromGoogleSheet !== 'function') return;
+
+      try {
+        const sheetLeads = await fetchLeadsFromGoogleSheet();
+        if (sheetLeads && Array.isArray(sheetLeads)) {
+          if (syncDot) syncDot.style.background = '#10B981';
+          if (syncText) syncText.innerText = `Google Sheets: Live (${sheetLeads.length} leads)`;
+          if (cloudStatusEl) {
+            cloudStatusEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Connected: Google Sheets Cloud (${sheetLeads.length} records synced)</span>`;
+          }
+
+          if (ACTIVE_PIN_SESSION && ACTIVE_DECRYPTED_LEADS) {
+            let addedCount = 0;
+            sheetLeads.forEach(sl => {
+              const cleanSlPhone = String(sl.phone || '').replace(/[^0-9]/g, '');
+              const exists = ACTIVE_DECRYPTED_LEADS.some(l => {
+                const cleanLPhone = String(l.phone || '').replace(/[^0-9]/g, '');
+                return (l.id && sl.id && l.id === sl.id) ||
+                  (cleanLPhone && cleanSlPhone && cleanLPhone === cleanSlPhone && l.date === sl.date) ||
+                  (cleanLPhone && cleanSlPhone && cleanLPhone === cleanSlPhone && l.loanType === sl.loanType);
+              });
+              if (!exists) {
+                sl._isLive = true;
+                ACTIVE_DECRYPTED_LEADS.unshift(sl);
+                addedCount++;
+              }
+            });
+
+            if (addedCount > 0) {
+              await saveEncryptedLeads(ACTIVE_DECRYPTED_LEADS);
+              updateMetrics(ACTIVE_DECRYPTED_LEADS);
+              renderLeadsTable();
+              if (isBackground) {
+                playAlertSound();
+              }
+            }
+          }
+          return sheetLeads.length;
+        }
+      } catch (err) {
+        console.warn('Google Sheets sync notice:', err);
+      }
+      return 0;
+    }
+
+    async function refreshLeadsManually() {
+      const btn = document.querySelector('.btn-sync');
+      const origHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> <span>Checking...</span>';
+        btn.disabled = true;
+      }
+      try {
+        const count = await syncGoogleSheetLeads(false);
+        if (typeof initCloudSync === 'function') {
+          await initCloudSync();
+        }
+        // Also absorb any local leads
+        const pendingRaw = localStorage.getItem('gcfs_customer_leads');
+        if (pendingRaw && ACTIVE_DECRYPTED_LEADS && ACTIVE_PIN_SESSION) {
+          try {
+            const list = JSON.parse(pendingRaw);
+            let addedLocal = 0;
+            list.forEach(pl => {
+              const cleanPlPhone = String(pl.phone || '').replace(/[^0-9]/g, '');
+              const exists = ACTIVE_DECRYPTED_LEADS.some(l => {
+                const cleanLPhone = String(l.phone || '').replace(/[^0-9]/g, '');
+                return (cleanLPhone && cleanPlPhone && cleanLPhone === cleanPlPhone && l.date === pl.date);
+              });
+              if (!exists) {
+                pl._isLive = true;
+                ACTIVE_DECRYPTED_LEADS.unshift(pl);
+                addedLocal++;
+              }
+            });
+            if (addedLocal > 0) {
+              await saveEncryptedLeads(ACTIVE_DECRYPTED_LEADS);
+              updateMetrics(ACTIVE_DECRYPTED_LEADS);
+              renderLeadsTable();
+            }
+          } catch (e) {}
+        }
+      } catch (err) {
+        console.error('Refresh leads error:', err);
+      } finally {
+        if (btn) {
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }
+      }
+    }
+
+    // Appwrite Cloud Realtime Sync (Secondary)
+    async function initCloudSync() {
+      // 1. First sync from Google Sheets (Reliable, Zero Pause)
+      await syncGoogleSheetLeads(false);
+
+      // 2. Secondary: Appwrite Cloud if configured and active
       if (typeof appwriteDatabases !== 'undefined' && appwriteDatabases && typeof APPWRITE_CONFIG !== 'undefined') {
         try {
           const res = await appwriteDatabases.listDocuments(
@@ -2251,10 +2352,6 @@
             APPWRITE_CONFIG.collectionId
           );
           
-          if (syncDot) syncDot.style.background = '#10B981';
-          if (syncText) syncText.innerText = `Appwrite Cloud: Live (${res.total} leads)`;
-          if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Connected: Appwrite Cloud (${res.total} documents synced)</span>`;
-
           if (res && res.documents && res.documents.length > 0 && ACTIVE_PIN_SESSION && ACTIVE_DECRYPTED_LEADS) {
             let addedFromCloud = 0;
             res.documents.forEach((doc, idx) => {
@@ -2283,41 +2380,18 @@
               renderLeadsTable();
             }
           }
-
-          // Realtime Subscription
-          if (appwriteClient) {
-            appwriteClient.subscribe(
-              `databases.${APPWRITE_CONFIG.databaseId}.collections.${APPWRITE_CONFIG.collectionId}.documents`,
-              (response) => {
-                console.log('Appwrite Cloud Realtime Event:', response);
-                if (response.payload) {
-                  handleIncomingLead({
-                    id: response.payload.$id || Date.now(),
-                    date: response.payload.date || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-                    name: response.payload.name,
-                    phone: response.payload.phone,
-                    loanType: response.payload.loanType,
-                    amount: response.payload.amount,
-                    location: response.payload.location || 'Boisar'
-                  });
-                } else {
-                  initCloudSync();
-                }
-              }
-            );
-          }
         } catch (err) {
-          console.log('Cloud sync status:', err.message || err);
-          if (syncDot) syncDot.style.background = '#F59E0B';
-          if (syncText) syncText.innerText = 'Local Live Sync: Active';
-          if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #D97706; font-weight: 500;"><i class="fa-solid fa-triangle-exclamation"></i> Notice: ${err.message || 'Database not found. Setup in Appwrite Cloud.'}</span>`;
+          console.log('Appwrite secondary status:', err.message || err);
         }
-      } else {
-        if (syncDot) syncDot.style.background = '#10B981';
-        if (syncText) syncText.innerText = 'Local Live Sync: Active';
-        if (cloudStatusEl) cloudStatusEl.innerHTML = `<span style="color: #10B981; font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Local Realtime Sync Active</span>`;
       }
     }
+
+    // Auto Background Refresh every 30 seconds for live incoming leads
+    setInterval(() => {
+      if (ACTIVE_PIN_SESSION && ACTIVE_DECRYPTED_LEADS) {
+        syncGoogleSheetLeads(true);
+      }
+    }, 30000);
 
     // ========================================================
     // REALTIME LIVE SYNC LISTENERS
